@@ -1,0 +1,40 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<h:outputStylesheet name="bootstrap.min.css" library="css" />
+		<h:outputStylesheet name="style_II.css" library="css" />
+		<title><ui:insert name="titulo">CoachCrossfit System</ui:insert></title>
+	</h:head>
+	
+	<ui:define name="_content">
+		<div class="_container-login">
+			<h:graphicImage library="images" name="Logo_II.png" styleClass="logo"/>
+			<h:form id="login" styleClass="col-lg-12"> 
+				<div class="input-group"> 
+					<p:inputText id="emailUser" placeholder="Email" styleClass="form-control input-lg input-sm _input-style"
+						value="#{loginBean.student.user.emailUser}" required="true" requiredMessage="E-mail é obrigatório" 
+						validator="#{studentBean.validations.validateEmail}"/>
+					<p:password id="passUser" placeholder="Senha" styleClass="form-control input-lg input-sm _input-style"
+						value="#{loginBean.student.user.passUser}" required="true" requiredMessage="Senha é obrigatória"
+						validator="#{studentBean.validations.validatePass}"/>
+					<p:commandButton value="Entrar" styleClass="btn btn-lg btn-primary _input-style" 
+						action="#{loginBean.login}"/>
+					<p:messages autoUpdate="true" id="messages"/>
+				</div>					
+			</h:form>
+		</div>
+	</ui:define>
+	
+	<ui:define name="_footer">									
+		<p:button outcome="/screen/students/StudentCad" icon="ui-icon-circle-check" value="Começe a treinar agora!"
+			styleClass="btn btn-lg _btn-registering" />
+	</ui:define>
+	
+</ui:composition>  

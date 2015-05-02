@@ -1,0 +1,50 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">Cadastre-se</ui:define>
+	
+	<ui:define name="_header">
+		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1>
+	</ui:define>
+	
+	<ui:define name="_content">
+		<h:form id="studentCad">			
+			<p class="_touch-img">Toque na imagem para alterá-la</p>						
+			<div class="_img-border">
+				<h:graphicImage library="images" name="Perfil.png" styleClass="_img-profile"/>
+			</div>  
+			<p:inputText id="nameStudent" value="#{studentBean.student.nameStudent}"  
+				placeholder="Nome" styleClass="form-control input-lg input-sm _input-style _record-student"
+				required="true" requiredMessage="Nome é obrigatório"
+				validator="#{studentBean.validations.validateName}"/>
+			<p:inputText id="emailUser" value="#{studentBean.student.user.emailUser}"
+				placeholder="E-mail" styleClass="form-control input-lg input-sm _input-style _record-student"
+				required="true" requiredMessage="E-mail é obrigatório"
+				validator="#{studentBean.validations.validateEmail}"/>
+			<p:selectOneMenu id="genderStudent" value="#{studentBean.student.genderStudent}" 
+				style="width:100%; height:35px;" styleClass="_input-style _record-student selectpicker show-tick"
+				validator="#{studentBean.validations.validateInt}">				
+				<f:selectItem itemLabel="Masculino" itemValue="1"/>
+				<f:selectItem itemLabel="Feminino" itemValue="0"/> 
+			</p:selectOneMenu>				
+			<p:selectOneMenu id="statusUser" value="#{studentBean.student.user.statusUser}" 
+				style="width:100%; height:35px;" styleClass="_input-style _record-student"
+				validator="#{studentBean.validations.validateInt}">				
+				<f:selectItem itemLabel="Status Ativo" itemValue="1"/>
+				<f:selectItem itemLabel="Status Inativo" itemValue="0"/> 
+			</p:selectOneMenu>
+			<p:messages autoUpdate="true" id="messages"/>					
+		</h:form>	
+	</ui:define>
+	
+	<ui:define name="_footer">	
+		<!--  <h:outputText id="message" value="#{studentControl.message}" /> -->						
+		<p:commandButton id="btn_cadastrar" action="#{studentBean.studentCad}"
+				icon="ui-icon-circle-check" value="Salvar!" styleClass="btn btn-lg _btn-registering _confirm"/>	
+	</ui:define>
+		
+</ui:composition>  

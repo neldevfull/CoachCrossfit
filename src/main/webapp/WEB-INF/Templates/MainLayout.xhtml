@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<h:outputStylesheet name="bootstrap.min.css" library="css" />
+	<h:outputStylesheet name="style_II.css" library="css" />
+	<title><ui:insert name="titulo">CoachCrossfit System</ui:insert></title>
+</h:head>
+<h:body styleClass="_img-background">
+	<header>
+		<ui:insert name="_header"></ui:insert>
+	</header>
+	<div class="container-fluid container-full" style="position:relative;">
+		<div class="row">
+			<div class="col-lg-12 text-center v-center">
+				<ui:insert name="_content"></ui:insert>											
+			</div>
+		</div>				
+	</div>	
+	<footer>
+		<ui:insert name="_footer"></ui:insert>
+	</footer>	
+</h:body> 
+</html>  

@@ -1,0 +1,90 @@
+*{
+	margin:0 auto;
+}
+._container-login{
+	margin: 5%;
+	/*background-color:red;*/
+}
+._input-login{
+	margin:	1% 0 !important;
+	border-radius: 5px !important;  
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (max-width:1366px) {
+	._input-style{
+		width: 100%;
+		height: 30%;
+		margin:	3% 0 1% 0 !important;
+	}
+	._record-student{
+		border-color: #f46464;
+	}
+	._confirm{
+		background-color: #00a800 !important;
+	}	 
+	/**	Style screen Login
+	*	[Start]
+	*/
+	._container-login{
+		margin: 30% 5% 5% 5%;		
+	}		
+	.logo{
+		width: 151%;
+		margin-left:-25%;		 						
+	}
+	/**	Style screen Login
+	*	[End]
+	*/
+	
+	/**	Style screen Home
+	*	[Start]
+	*/
+	.header{
+		margin-top: 0;
+		color: white;
+		background-color: #af0f14;
+		font-size: 1.2em;
+	}
+	._img-perfil{
+		width: 50%;
+		border-radius:50%;	
+		/*border: solid 1px #337ab7;*/			
+	}
+	
+	/**	Style screen Home
+	*	[End]
+	*/
+	footer{
+		width: 100% !important;		
+		position: absolute;
+		bottom: 0;		
+	}	
+	._btn-registering{
+		width: 100% !important;		
+		background-color: #d31515;
+		color: white !important;
+		border-color: none !important;		
+	}	
+	.ui-icon{
+		background-color: white;
+	}
+}
+
+/* Caso o dispositivo esteja em modo paisagem */
+@media (max-width:1366px) and (orientation: landscape) { 
+	footer{
+		width: 100% !important;	
+		position: relative;						
+	}	
+}
+	
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width:1367px) { 
+	._input-login{
+		background-color:black;  
+	}
+	.logo{
+		max-width: 50%;		
+	}	
+}

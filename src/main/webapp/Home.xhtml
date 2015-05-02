@@ -1,0 +1,26 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">Home</ui:define>
+	
+	<ui:define name="_header">
+		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1>
+	</ui:define>
+		
+	<ui:define name="_content">
+		<div class="_img-border">
+			<h:graphicImage library="images" name="Perfil.png" styleClass="_img-profile"/>
+		</div>   
+		<p class="label-name">Coach: <SPAN>Matheus</SPAN></p>
+		<p:commandButton icon="fa fa-child" type="button" value="Exercícios" styleClass="_input-style btn btn-lg btn-primary"/>
+		<p:commandButton icon="fa fa-trophy" type="button" value="Treinos" styleClass="_input-style btn btn-lg btn-primary"/>
+		<p:commandButton icon="fa fa-user" type="button" value="Alunos" styleClass="_input-style btn btn-lg btn-primary"/>
+		<p:commandButton icon="fa fa-circle-o" type="button" value="Cíclos" styleClass="_input-style btn btn-lg btn-primary"/>
+		<p:commandButton icon="fa fa-file-o" type="button" value="Relatórios" styleClass="_input-style btn btn-lg btn-primary"/>	 	
+	</ui:define>
+		
+</ui:composition>  

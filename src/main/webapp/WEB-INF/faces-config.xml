@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+    <application>
+		<navigation-handler>
+			org.primefaces.mobile.application.MobileNavigationHandler
+		</navigation-handler>
+	</application>
+	
+	<lifecycle>
+        <phase-listener>br.com.coachcrossfit.utilities.LoginPhaseListener</phase-listener>
+    </lifecycle>
+    
+    <navigation-rule>
+	    <from-view-id>/*</from-view-id>
+	    <navigation-case>
+	          <from-outcome>Pag404</from-outcome>
+	          <to-view-id>/screen/errors/PagError.xhtml</to-view-id> 	          
+	    </navigation-case>
+	</navigation-rule>
+
+</faces-config>

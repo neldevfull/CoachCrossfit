@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14291228916560" configfile="/CoachCrossfit/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" id="pf143040380625618" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf143040380625619" path="/*"/>
+  <nodes xsi:type="pageflow:PFPage" name="screen/errors/PagError.xhtml" id="pf143040380625620" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf143040380625619" path="/screen/errors/PagError.xhtml"/>
+  <links id="pf143040380625619" target="pf143040380625620" source="pf143040380625618" outcome="Pag404"/>
+</pageflow:Pageflow>

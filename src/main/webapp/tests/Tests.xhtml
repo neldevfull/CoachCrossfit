@@ -1,0 +1,28 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Login</ui:define>
+	
+	<ui:define name="_content">
+		<div class="_container-login">
+			<h:graphicImage library="images" name="Logo_II.png" styleClass="logo"/>
+			<h:form id="login" styleClass="col-lg-12"> 
+				<div class="input-group"> 
+					<p:inputText id="email" placeholder="Email" styleClass="form-control input-lg input-sm _input-style"/>
+					<p:password id="password" placeholder="Senha" styleClass="form-control input-lg input-sm _input-style" />
+					<p:commandButton action="#{testLogin.test}" value="Entrar" styleClass="btn btn-lg btn-primary _input-style" />
+				</div>					
+			</h:form>
+		</div>
+	</ui:define>
+	
+	<ui:define name="_footer">									
+		<p:button outcome="/screen/students/StudentCad" icon="ui-icon-circle-check" value="Começe a treinar agora!"
+			styleClass="btn btn-lg _btn-registering" />
+	</ui:define>
+	
+</ui:composition>  

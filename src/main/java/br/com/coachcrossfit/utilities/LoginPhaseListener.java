@@ -13,6 +13,9 @@ public class LoginPhaseListener implements PhaseListener{
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Carrega a primeira fase - RESTORE VIEW
+	 */
 	public PhaseId getPhaseId() {
         return PhaseId.RESTORE_VIEW;
     }
@@ -20,6 +23,9 @@ public class LoginPhaseListener implements PhaseListener{
     public void beforePhase(PhaseEvent event) {
     }
 
+    /**
+     * Responsável pela autorização do usuário no sistema
+     */
     public void afterPhase(PhaseEvent event) {
         FacesContext fc = event.getFacesContext();
         boolean loginPage = fc.getViewRoot().getViewId().lastIndexOf("Login") > -1 ? true : false;

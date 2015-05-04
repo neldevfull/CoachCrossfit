@@ -11,8 +11,6 @@ public class Util {
 
 	/**
 	 * Parseia tipo Date (util) para String
-	 * @param date
-	 * @return
 	 */
 	public String parseDateToString(Date date){
 		Locale locale = new Locale("pt", "BR");
@@ -21,6 +19,9 @@ public class Util {
 		return dateStr;
 	}
 	
+	/**
+	 * Utilizado para gerar o hash para senha
+	 */
 	public String hashPass(String pass) throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
 		byte messageDigest[] = algorithm.digest(pass.getBytes("UTF-8"));

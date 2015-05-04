@@ -7,9 +7,6 @@ public class Reflections<T> {
 	
 	/**
 	 * Busca todos os atributos da classe menos o id da Classe e os objeto(s) associado(s)
-	 * @param object
-	 * @param compareClass
-	 * @return
 	 */
 	public Field[] getAllLessId(Class<T> object, List<String> compareClass){		
 		int count = 0;
@@ -51,8 +48,6 @@ public class Reflections<T> {
 
 	/**
 	 * Busca todos os campos do Bean e retorna-os menos o id da Classe
-	 * @param object
-	 * @return
 	 */
 	public Field[] getAllLessId(Class<T> object){		
 		int count = 0;

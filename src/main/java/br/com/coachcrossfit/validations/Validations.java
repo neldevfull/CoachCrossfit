@@ -57,7 +57,7 @@ public class Validations {
 
 	public void validateInt(FacesContext fc, UIComponent ui, Object obj) throws ValidatorException{		
 		int integer = (int) obj;
-		if ((integer != 0 && integer != 1) || (integer != 1 && integer != 2))
+		if (integer != 1 && integer != 2)
 			throw new ValidatorException(new FacesMessage("Valor numérico inválido"));
 	}
 

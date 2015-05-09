@@ -5,7 +5,7 @@ public class User {
 	private String emailUser;
 	private String passUser;
 	private int typeUser;
-	private int statusUser = 1;	
+	private int statusUser;	
 	
 	public int getIdUser() {
 		return idUser;

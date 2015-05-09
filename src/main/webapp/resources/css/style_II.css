@@ -1,13 +1,70 @@
 *{ 
 	margin:0 auto; 		
 }
+ /* Fontes */
+ @font-face{
+	font-family: "DroidSans";	 
+	src: url('#{resource['fonts/DroidSans.ttf']}');
+}
+@font-face{
+	font-family: "DroidSans-Bold";
+	src: url('#{resource['fonts/DroidSans-Bold.ttf']}');
+}
+ /* Valores padrão */
+ body{
+    font-family: DroidSans;
+}
+ 
+/* Estilo para as telas principais */
+._screen-title {
+	width: 100%;
+	height: 30%; 	
+	border-bottom: 1px dashed white;
+	float:left;
+	text-align: left;
+	font-size:1.5em;	
+	color: #255e8c;
+}
 
-/* PrimeFaces estilo modificado [Start] */
+.tableFirstLine {    
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-top: 1px solid #BBBBBB;
+}
+ 
+.tableNextLine {
+    background: none repeat scroll 0 0 #FFFFFFF;
+    border-top: 1px solid #BBBBBB;
+}
+._list-container{
+	width: 100%;
+	padding: 2.5% 10%;
+	font-size: 1.5em;
+	margin-bottom: 10%;
+}
+._list-content{
+	float:left;
+}
+._list-button{
+	float: right;
+	background-color: white;
+	border: none;
+}
+
+/* PrimeFaces estilo modificado */
+/* Botões */
+.ui-button-icon-only .ui-icon.fa{
+	color: #255E8C !important;
+}
+.ui-button-icon-only .ui-icon.fa, .ui-button-text-icon-left .ui-icon.fa, .ui-button-text-icon-right .ui-icon.fa {
+  background-color: transparent !important;
+}
+
 /* SelectOneMenu */
 .ui-selectonemenu .ui-selectonemenu-label {
   color: #9999AF;
   font-weight: bold;
 }
+
 /* SelectOneMenu Icon */
 .ui-selectonemenu .ui-selectonemenu-trigger .ui-icon {
   width: 150%;
@@ -15,15 +72,15 @@
   float: left;
   margin-left: -2px;
 }
-/* PrimeFaces estilo modificado [End] */
+
 ._container-login{
 	margin: 5%;
-	/*background-color:red;*/
 }
 ._input-login{
 	margin:	1% 0 !important;
 	border-radius: 5px !important;  
 }
+
 /* Estilo para icones e botões */
 .fa{
 	background-color: #337AB7 !important;
@@ -32,6 +89,7 @@
 ._img-background{
 	background-image:url(#{request.contextPath}/resources/images/Background.jpg);
 }
+
 /* Medium devices (desktops, 992px and up) */
 @media (max-width:1366px) {
 	._input-style{
@@ -74,6 +132,12 @@
 		width: 95%; 
 		border-radius:50%;	
 		border: solid 2px #255c89;
+		background-color: #ADADAD; 			
+	}
+	._img-cam{
+		width: 95%; 
+		border-radius:50%;	
+		border: solid 2px #255c89;
 		background-color: #ADADAD;			
 	}
 	._img-border{
@@ -95,13 +159,19 @@
 	footer{
 		width: 100% !important;		
 		position: absolute;
-		bottom: 0;		
+		bottom: 0;	
+		position: relative !important;
 	}	
 	._btn-registering{
 		width: 100% !important;		
+		height: 6.5% !important;
 		background-color: #d31515;
 		color: white !important;
-		border-color: none !important;		
+		border-color: none !important;	
+		position: fixed !important;	
+		bottom: 0;	
+		opacity: 0.9;
+    	filter: alpha(opacity=90); /* For IE8 and earlier */
 	}	
 	.ui-icon{
 		background-color: white;

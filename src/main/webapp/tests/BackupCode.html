@@ -22,9 +22,57 @@
 	<f:selectItem itemLabel="Status Ativo" itemValue="1"/>
 	<f:selectItem itemLabel="Status Inativo" itemValue="0"/> 
 </p:selectOneMenu>
--->
+
+BOTÃO PERTENCE A TELA STUDENTCAD.XHTML
+<p:commandButton icon="fa fa-user" type="button" value="Alunos" styleClass="_input-style btn btn-lg btn-primary"/>
+
+BOTÃO PERTENCE A TELA LOGIN.XHTML
+<!--  <p:commandButton value="Entrar" styleClass="btn btn-lg btn-primary _input-style" 
+						action="#{loginBean.login}"/> --> 
+						
+						
+<!-- 
+
+- DEVER SER IMPLEMENTADO EM STUDENTBEAN.JAVA
+
+//	private boolean selectStudent(GenericsDAO generics) throws NoSuchFieldException, SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
+//		boolean success = false;
+//		ResultSet result;
+//		List<Object> valuesConditions = new ArrayList<Object>();
+//		List<String> fields = new ArrayList<String>();
+//		List<String> fieldsConditions = new ArrayList<String>();
+//		List<String> joinsConditions = new ArrayList<String>();	
+//		String join = "INNER JOIN", tableA = "tb_user", tableB = "tb_student";
+//		
+//		fields.add("*");
+//		fieldsConditions.add("emailUser");
+//		fieldsConditions.add("passUser");
+//		
+//		valuesConditions.add(this.student.getUser().getEmailUser());
+//		
+//		// Gera hash da senha
+//		String pass = studentBean.util.hashPass(this.student.getUser().getPassUser());
+//		valuesConditions.add(pass);
+//		
+//		joinsConditions.add("idUser");
+//		
+//		result = generics.joinDuble(fields, fieldsConditions, valuesConditions, joinsConditions, join, tableA, tableB);
+//		
+//		if(result.last()){
+//			// Chama método para carregar aluno		
+//			this.studentBean.resultSetStudent(this.student, result);
+//			success = true;
+//		}
+//				
+//		result.close();
+//		generics.closeStatement();
+//		
+//		return success;
+//	}
 
 
  -->
+
+
 </body>
 </html>

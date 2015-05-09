@@ -21,7 +21,7 @@ public class GenericsDAO {
 	}
 	
 	public ResultSet joinDuble(List<String> fields, List<String> fieldsConditions, List<Object> valuesConditions, 
-			 List<String> joinsConditions, String join, String tableA, String tableB) throws SQLException{
+			 List<String> joinsConditions, String join, String tableA, String tableB, String conditions) throws SQLException{
 		String sql = "";
 		String joinConditions = "";
 		String fieldConditions = "";
@@ -42,7 +42,7 @@ public class GenericsDAO {
 			}
 		}
 		
-		sql += joinConditions + fieldConditions;
+		sql += joinConditions + fieldConditions + conditions;
 		
 		this.statement = this.connection.prepareStatement(sql);
 		loadStatement(valuesConditions, statement);
@@ -105,7 +105,7 @@ public class GenericsDAO {
 		
 	}
 	
-	public ResultSet select(Field[] fields, String table) throws SQLException{			
+	public ResultSet select(Field[] fields, String table, String conditions) throws SQLException{			
 		String sql = "SELECT ";
 		String fieldsSelect = "";
 		
@@ -113,7 +113,8 @@ public class GenericsDAO {
 			fieldsSelect += fieldsSelect == "" ? field.getName() : ","+field.getName();
 		}
 		
-		sql += fieldsSelect + " FROM " + table;
+		sql += conditions != "" ? fieldsSelect + " FROM " + table + conditions :
+			fieldsSelect + " FROM " + table;
 		this.statement = this.connection.prepareStatement(sql);
 		
 		try{			

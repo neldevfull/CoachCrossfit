@@ -5,18 +5,31 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
     
-    <ui:define name="titulo">Cadastre-se</ui:define>
+    <ui:define name="titulo">Cadastro Aluno</ui:define>
 	
 	<ui:define name="_header">
 		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1>
 	</ui:define>
 	
 	<ui:define name="_content">
-		<h:form id="studentCad">			
-			<p class="_touch-img">Toque na imagem para alterá-la</p>						
+		<h:form id="studentCad">			 		
+			<p class="_touch-img">Toque na imagem para alterá-la</p>									
 			<div class="_img-border">
-				<h:graphicImage library="images" name="Perfil.png" styleClass="_img-profile"/>
-			</div>  
+				<h:panelGroup id="studentImg">
+					<p:graphicImage library="images" name="Perfil.png" styleClass="_img-profile" 
+						onclick="PF('imgDialog').show(); return false;" rendered="#{not studentImg.photoCapture}"/>  
+					<p:graphicImage value="#{studentImg.photoContent}" styleClass="_img-cam" cache="false"
+						onclick="PF('imgDialog').show(); return false;" rendered="#{studentImg.photoCapture}"/>
+				</h:panelGroup> 
+			</div>							 
+			<p:dialog widgetVar="imgDialog" header="Perfil Aluno" modal="true" resizable="false">
+				<h:panelGrid>
+					<p:photoCam widgetVar="camera" format="jpeg"
+						listener="#{studentImg.capturePhoto}" 
+						update="studentImg" />
+					<p:commandLink value="Capturar Foto" onclick="PF('camera').capture(); return false;"/>
+				</h:panelGrid>
+			</p:dialog>			
 			<p:inputText id="nameStudent" value="#{studentBean.student.nameStudent}"  
 				placeholder="Nome" styleClass="form-control input-lg input-sm _input-style _record-student"
 				required="true" requiredMessage="Nome é obrigatório"
@@ -27,24 +40,23 @@
 				validator="#{studentBean.validations.validateEmail}"/>
 			<p:selectOneMenu id="genderStudent" value="#{studentBean.student.genderStudent}" 
 				style="width:100%; height:35px;" styleClass="_input-style _record-student selectpicker show-tick"
-				validator="#{studentBean.validations.validateInt}">				
+				validator="#{studentBean.validations.validateInt}">												
 				<f:selectItem itemLabel="Masculino" itemValue="1"/>
-				<f:selectItem itemLabel="Feminino" itemValue="0"/> 
+				<f:selectItem itemLabel="Feminino" itemValue="2"/> 		 		
 			</p:selectOneMenu>				
 			<p:selectOneMenu id="statusUser" value="#{studentBean.student.user.statusUser}" 
 				style="width:100%; height:35px;" styleClass="_input-style _record-student"
-				validator="#{studentBean.validations.validateInt}">				
-				<f:selectItem itemLabel="Status Ativo" itemValue="1"/>
-				<f:selectItem itemLabel="Status Inativo" itemValue="0"/> 
+				validator="#{studentBean.validations.validateInt}" title="Status">				 							
+				<f:selectItem itemLabel="Ativo" itemValue="1"/>
+				<f:selectItem itemLabel="Inativo" itemValue="2"/>  				 
 			</p:selectOneMenu>
-			<p:messages autoUpdate="true" id="messages"/>					
+			<p:messages autoUpdate="true" id="messages"/>				
 		</h:form>	
 	</ui:define>
 	
 	<ui:define name="_footer">	
-		<!--  <h:outputText id="message" value="#{studentControl.message}" /> -->						
-		<p:commandButton id="btn_cadastrar" action="#{studentBean.studentCad}"
-				icon="ui-icon-circle-check" value="Salvar!" styleClass="btn btn-lg _btn-registering _confirm"/>	
+		<p:commandButton action="#{studentBean.studentMain}" icon="ui-icon-circle-check"
+			value="Salvar!" styleClass="btn btn-lg _btn-registering _confirm" update="studentCad"/>  
 	</ui:define>
 		
 </ui:composition>  

@@ -19,11 +19,11 @@
 			<h:form id="login" styleClass="col-lg-12"> 
 				<div class="input-group"> 
 					<p:inputText id="emailUser" placeholder="Email" styleClass="form-control input-lg input-sm _input-style"
-						value="#{loginBean.student.user.emailUser}" required="true" requiredMessage="E-mail é obrigatório" 
-						validator="#{studentBean.validations.validateEmail}"/>
+						value="#{loginBean.user.emailUser}" required="true" requiredMessage="E-mail é obrigatório" 
+						validator="#{loginBean.validations.validateEmail}"/>
 					<p:password id="passUser" placeholder="Senha" styleClass="form-control input-lg input-sm _input-style"
-						value="#{loginBean.student.user.passUser}" required="true" requiredMessage="Senha é obrigatória"
-						validator="#{studentBean.validations.validatePass}"/>
+						value="#{loginBean.user.passUser}" required="true" requiredMessage="Senha é obrigatória"
+						validator="#{loginBean.validations.validatePass}"/>					
 					<p:commandButton value="Entrar" styleClass="btn btn-lg btn-primary _input-style" 
 						action="#{loginBean.login}"/>
 					<p:messages autoUpdate="true" id="messages"/>
@@ -33,8 +33,8 @@
 	</ui:define>
 	
 	<ui:define name="_footer">									
-		<p:button outcome="/screen/students/StudentCad" icon="ui-icon-circle-check" value="Começe a treinar agora!"
-			styleClass="btn btn-lg _btn-registering" />
+		<!-- <p:button outcome="/screen/students/StudentCad" icon="ui-icon-circle-check" value="Começe a treinar agora!"
+			styleClass="btn btn-lg _btn-registering" />  -->
 	</ui:define>
 	
 </ui:composition>  

@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 import javax.xml.bind.ValidationException;
 
-import br.com.coachcrossfit.beans.StudentBean;
+import br.com.coachcrossfit.beans.student.StudentBean;
 import br.com.coachcrossfit.models.Student;
 import br.com.coachcrossfit.models.User;
 import br.com.coachcrossfit.reflections.Reflections;
@@ -21,7 +21,16 @@ public class MainTest {
 	public static void main(String[] args){
 							
 		MethodsTests mt = new MethodsTests(); 
-		mt.testJoinDuble();
+		
+		try{
+			//mt.idStudentSearch();
+			mt.testJoinDuble();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		//mt.testJoinDuble();
 		
 		/*
 		Reflections<StudentBean> ref = new Reflections<StudentBean>();

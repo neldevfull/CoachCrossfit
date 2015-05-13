@@ -32,7 +32,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
+			<version>5.1.34</version>
 		</dependency>
 		
 		<!-- API Servlet -->
@@ -41,7 +41,7 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		
+						
 		<!-- Font Awesome (Icons) -->
 		<dependency>
 			<groupId>org.webjars</groupId>

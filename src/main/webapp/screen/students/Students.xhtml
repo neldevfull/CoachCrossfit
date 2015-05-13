@@ -27,9 +27,11 @@
 		</h:dataTable>			
 	</ui:define>
 	
-	<ui:define name="_footer">									
-		<p:commandButton id="btn_cadastrar" action="#{studentBean.loadStudent}"
-				icon="ui-icon-circle-check" value="Novo Aluno" styleClass="btn btn-lg _btn-registering _confirm"/>	
+	<ui:define name="_footer">	
+		<h:form> 								
+			<p:commandButton id="btn_cadastrar" action="#{studentBean.loadStudent}" 
+					icon="ui-icon-circle-check" value="Novo Aluno" styleClass="btn btn-lg _btn-registering _confirm"/>
+		</h:form>	
 	</ui:define>
 		
 </ui:composition>   

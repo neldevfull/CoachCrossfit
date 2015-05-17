@@ -26,6 +26,7 @@ public class StudentsBean {
 			this.students = this.studentBean.studentsList(students, generics);
 		}		
 		catch(Exception e){
+			System.out.println(e.getMessage());
 			FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage(e.getMessage().toString()));			
 		}
 	}

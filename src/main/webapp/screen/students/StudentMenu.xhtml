@@ -15,12 +15,12 @@
 		<div class="_img-border">
 			<h:graphicImage library="images" name="Perfil.png" styleClass="_img-profile"/>
 		</div>   
-		<p class="label-name">Coach: <SPAN><p:outputLabel value="#{coachBean.nameUser}"/></SPAN></p>		 
-		<p:commandButton icon="fa fa-child" type="button" value="Exercícios" styleClass="_input-style btn btn-lg btn-primary"/>
-		<p:button outcome="/screen/students/Students" icon="fa fa-user" type="button" value="Alunos" styleClass="_input-style btn btn-lg btn-primary"/>
-		<p:commandButton icon="fa fa-group" type="button" value="Grupos" styleClass="_input-style btn btn-lg btn-primary"/>			
+		<p class="label-name">Atléta: <SPAN><p:outputLabel value="#{studentBean.student.nameUser}"/></SPAN></p>
+		<p:commandButton icon="fa fa-cubes" type="button" value="Dados Pessoais	" styleClass="_input-style btn btn-lg btn-primary"/>
+		<p:commandButton icon="fa fa-trophy" type="button" value="Personal Records" styleClass="_input-style btn btn-lg btn-primary"/>
+		<p:commandButton icon="fa fa-circle-o" type="button" value="Cíclos" styleClass="_input-style btn btn-lg btn-primary"/>		
 		<p:commandButton icon="fa fa-file-o" type="button" value="Relatórios" styleClass="_input-style btn btn-lg btn-primary"/>
-		<p:commandButton icon="fa fa-line-chart" type="button" value="Gráficos" styleClass="_input-style btn btn-lg btn-primary"/>			 		 			 	
+		<p:commandButton icon="fa fa-line-chart" type="button" value="Gráficos" styleClass="_input-style btn btn-lg btn-primary"/>	 	
 	</ui:define>
 		
 </ui:composition>  

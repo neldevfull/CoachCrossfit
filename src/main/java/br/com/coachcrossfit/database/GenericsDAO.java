@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import com.mysql.jdbc.Statement;
+
 public class GenericsDAO {
 	
 	/**
@@ -80,7 +82,40 @@ public class GenericsDAO {
 			throw new SQLException("Falha ao inserir no banco de dados");
 		}
 		
-	}	
+	}
+	
+	/**
+	 * Faz a inserção de dados e retorna id
+	 */
+	public int insertReturnId(Field[] fields, List<Object> values, String table) throws SQLException{
+		int idUser = 0;
+		// Monta a declaração
+		String sql = "INSERT INTO " + table + " (";
+		String parameter = "";
+		int count = 0;
+		
+		for (Field field : fields) {
+			sql += count == 0 ? field.getName() : "," + field.getName();
+			parameter += count == 0 ? "?" : ",?";			 
+			count++;
+		}
+		
+		try(PreparedStatement statement = this.connection.prepareStatement(sql+") VALUES ("+parameter+")", Statement.RETURN_GENERATED_KEYS)){								
+			loadStatement(values, statement);			
+			statement.executeUpdate();
+			
+			ResultSet result = statement.getGeneratedKeys();
+			while(result.next()){
+				idUser = result.getInt(1);
+			}
+			return idUser;   
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			throw new SQLException("Falha ao inserir no banco de dados");
+		}
+		
+	}
 	
 	public void delete(List<String> fields, List<Object> values, String table) throws SQLException{
 		String sql = "DELETE FROM " + table + " WHERE ";		

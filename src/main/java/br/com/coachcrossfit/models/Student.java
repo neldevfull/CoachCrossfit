@@ -1,20 +1,18 @@
 package br.com.coachcrossfit.models;
-
+ 
 import java.util.Date;
 
-public class Student{
+public class Student extends User{
 	
-	private int idStudent;
+	private int idStudent;	
+	@SuppressWarnings("unused")
+	// Utilizado apenas na reflection
 	private int idUser;
-	private int idCoach;
-	private String nameStudent;
+	private int idCoach;	
 	private float weightStudent;
 	private Date dateBirthStudent;
-	private float heightStudent;
-	private String imageStudent;
-	private int genderStudent;		
-	private User user = new User(); 
-		
+	private float heightStudent;		
+	 		
 	public Date getDateBirthStudent() {
 		return dateBirthStudent;
 	}
@@ -31,14 +29,6 @@ public class Student{
 		this.idStudent = idStudent;
 	}
 	
-	public int getIdUser() {
-		return idUser;
-	}
-	
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
-	
 	public int getIdCoach() {
 		return idCoach;
 	}
@@ -46,15 +36,7 @@ public class Student{
 	public void setIdCoach(int idCoach) {
 		this.idCoach = idCoach;
 	}
-	
-	public String getNameStudent() {
-		return nameStudent;
-	}
-	
-	public void setNameStudent(String nameStudent) {
-		this.nameStudent = nameStudent;
-	}
-	
+		
 	public float getWeightStudent() {
 		return weightStudent;
 	}
@@ -69,30 +51,6 @@ public class Student{
 	
 	public void setHeightStudent(float heightStudent) {
 		this.heightStudent = heightStudent;
-	}
-	
-	public String getImageStudent() {
-		return imageStudent;
-	}
-	
-	public void setImageStudent(String imageStudent) {
-		this.imageStudent = imageStudent;
-	}
-	
-	public int getGenderStudent() {
-		return genderStudent;
-	}
-
-	public void setGenderStudent(int gender) {
-		this.genderStudent = gender;
-	}
-	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User userbean) {
-		this.user = userbean;
 	}
 		
 }

@@ -77,10 +77,13 @@ public class UserBean {
 		User user = new User();
 		while(result.next()){
 			user.setIdUser(result.getInt("idUser"));
+			user.setNameUser(result.getString("nameUser"));
 			user.setEmailUser(result.getString("emailUser"));
 			user.setPassUser(result.getString("passUser"));
 			user.setTypeUser(result.getInt("typeUser"));
 			user.setStatusUser(result.getInt("statusUser"));
+			user.setImageUser(result.getString("imageUser"));
+			user.setGenderUser(result.getInt("genderUser"));
 		}
 		return user;
 	}

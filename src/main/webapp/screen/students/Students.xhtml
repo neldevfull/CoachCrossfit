@@ -13,23 +13,25 @@
 	
 	<ui:define name="_content">
 		<p:outputLabel value="Alunos" styleClass="_screen-title"/>
-		<h:dataTable value="#{studentsBean.students}" var="student"
-			emptyMessage="Nenhum aluno cadastrado" rowClasses="tableFirstLine,tableNextLine"
-			styleClass="_list-container">
-			<p:column> 
-				<h:outputText value="#{student.nameStudent}" styleClass="_list-content"/>
-			</p:column>
-			<p:column>
-				<h:form>					
-					<p:commandButton action="#{studentBean.loadStudent(student)}" icon="fa fa-cloud-upload" styleClass="_list-button"/>
-				</h:form>
-			</p:column> 
-		</h:dataTable>			
+		<h:form>
+			<h:dataTable value="#{studentsBean.students}" var="student"
+				emptyMessage="Nenhum aluno cadastrado" rowClasses="tableFirstLine,tableNextLine"
+				styleClass="_list-container">
+				<p:column>  
+					<h:commandLink value="#{student.nameUser}" styleClass="_list-content"
+						action="#{studentBean.loadStudent(student, '/screen/students/StudentMenu?faces-redirect=true')}"/>
+				</p:column>
+				<p:column>					
+					<p:commandButton action="#{studentBean.loadStudent(student, '/screen/students/StudentReg?faces-redirect=true')}"
+						icon="fa fa-cloud-upload" styleClass="_list-button"/>
+				</p:column> 
+			</h:dataTable>
+		</h:form>			
 	</ui:define>
 	
 	<ui:define name="_footer">	
 		<h:form> 								
-			<p:commandButton id="btn_cadastrar" action="#{studentBean.loadStudent}" 
+			<p:commandButton id="btn_cadastrar" action="#{studentBean.loadStudent('/screen/students/StudentReg?faces-redirect=true')}" 
 					icon="ui-icon-circle-check" value="Novo Aluno" styleClass="btn btn-lg _btn-registering _confirm"/>
 		</h:form>	
 	</ui:define>

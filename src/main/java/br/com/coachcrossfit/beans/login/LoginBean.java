@@ -43,7 +43,7 @@ public class LoginBean implements Serializable{
 		    	// Verifica tipo de usuário
 		    	if(user.getTypeUser() == 1){
 		    		// Cria coach e configura sessão
-		    		CoachBean coachBean = new CoachBean();
+		    		CoachBean coachBean = new CoachBean();		    		
 		    		Coach coach = coachBean.selectCoach(generics, this.user);		    		
 		    		
 		    		session.setAttribute("coachLogged", coach);

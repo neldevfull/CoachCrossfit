@@ -3,8 +3,8 @@ package br.com.coachcrossfit.models;
 public class Coach extends User {
 
 	private int idCoach;
+	// Utilizado apenas na reflection	
 	@SuppressWarnings("unused")
-	// Utilizado apenas na reflection
 	private int idUser;
 	private String crefCoach;		
 	

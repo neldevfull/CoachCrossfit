@@ -8,14 +8,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-
-import br.com.coachcrossfit.beans.coach.CoachBean;
-import br.com.coachcrossfit.beans.student.StudentBean;
 import br.com.coachcrossfit.beans.user.UserBean;
 import br.com.coachcrossfit.database.ConnectionFactory;
 import br.com.coachcrossfit.database.GenericsDAO;
-import br.com.coachcrossfit.models.Coach;
-import br.com.coachcrossfit.models.Student;
 import br.com.coachcrossfit.models.User;
 import br.com.coachcrossfit.validations.Validations;
 
@@ -38,25 +33,14 @@ public class LoginBean implements Serializable{
 		    		    		    
 		    if(this.user.getIdUser() > 0){
 		    	// Cria sessão
-		    	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);		    			    	
-		    	
-		    	// Verifica tipo de usuário
-		    	if(user.getTypeUser() == 1){
-		    		// Cria coach e configura sessão
-		    		CoachBean coachBean = new CoachBean();		    		
-		    		Coach coach = coachBean.selectCoach(generics, this.user);		    		
-		    		
-		    		session.setAttribute("coachLogged", coach);
-		    		return "Manager?faces-redirect=true";		    				    	
-		    	}
-		    	else{
-		    		// Cria aluno e configura sessão
-		    		StudentBean studentBean = new StudentBean();
-		    		Student student = studentBean.selectStudent(generics, this.user);
-		    		
-		    		session.setAttribute("studentLogged", student);
-		    		return "Home?faces-redirect=true";
-		    	}
+		    	HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);	
+		    	// Armazena sessão
+		    	session.setAttribute("userLogged", this.user); 		    	
+		    	// Verifica tipo de usuário e redireciona
+		    	if(this.user.getTypeUser() == 1)		    		
+		    		return "Manager?faces-redirect=true";		    				    			    	
+		    	else		    		
+		    		return "Home?faces-redirect=true";		    	
 		    }
 		    else{
 		    	FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage("E-mail ou senha incorretos"));

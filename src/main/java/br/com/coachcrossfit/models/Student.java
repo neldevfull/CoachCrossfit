@@ -5,22 +5,14 @@ import java.util.Date;
 public class Student extends User{
 	
 	private int idStudent;	
-	@SuppressWarnings("unused")
 	// Utilizado apenas na reflection
+	@SuppressWarnings("unused")	
 	private int idUser;
 	private int idCoach;	
 	private float weightStudent;
 	private Date dateBirthStudent;
 	private float heightStudent;		
 	 		
-	public Date getDateBirthStudent() {
-		return dateBirthStudent;
-	}
-
-	public void setDateBirthStudent(Date dateBirthStudent) {
-		this.dateBirthStudent = dateBirthStudent;
-	}
-		
 	public int getIdStudent() {
 		return idStudent;
 	}
@@ -43,6 +35,14 @@ public class Student extends User{
 	
 	public void setWeightStudent(float weightStudent) {
 		this.weightStudent = weightStudent;
+	}
+	
+	public Date getDateBirthStudent() {
+		return dateBirthStudent;
+	}
+
+	public void setDateBirthStudent(Date dateBirthStudent) {
+		this.dateBirthStudent = dateBirthStudent;
 	}
 	
 	public float getHeightStudent() {

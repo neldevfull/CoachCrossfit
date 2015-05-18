@@ -2,21 +2,23 @@ package br.com.coachcrossfit.beans.coach;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.coachcrossfit.beans.user.UserBean;
+import br.com.coachcrossfit.database.ConnectionFactory;
 import br.com.coachcrossfit.database.GenericsDAO;
 import br.com.coachcrossfit.models.Coach;
 import br.com.coachcrossfit.models.User;
-import br.com.coachcrossfit.reflections.Reflections;
 
 @ManagedBean
 @ViewScoped
@@ -25,22 +27,17 @@ public class CoachBean extends UserBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Coach coach;
 	private String nameUser;
-	private Reflections<Coach> coaRef;
 	private Class<Coach> coaClas;
 	private String table;
-	private Field field;
 	private Field[] fields;	
-	private List<String> compareClass;
 	private List<Object> valuesConditions;
 	
-	public CoachBean() {
-		this.coach = this.loadCoach() != null ? this.loadCoach() : new Coach();
-		this.nameUser = "";
-		this.coaRef  = new Reflections<Coach>();
+	public CoachBean() {		
+		this.nameUser = "";		
 		this.coaClas = Coach.class;
-		this.table   = "tb_coach";
-		this.compareClass = new ArrayList<String>();
-		this.valuesConditions = new ArrayList<Object>();
+		this.table   = "tb_coach";		
+		this.valuesConditions = new ArrayList<Object>();		
+		this.coach = this.loadCoach();
 	}
 	
 	/**
@@ -49,14 +46,15 @@ public class CoachBean extends UserBean implements Serializable {
 	public Coach resultSetCoach(ResultSet result) throws SQLException{
 		Coach coach = new Coach();
 		while(result.next()){
-			coach.setIdCoach(result.getInt("idCoach"));			
+			coach.setIdCoach(result.getInt("idCoach"));		
+			coach.setIdUser(result.getInt("idUser"));
 			coach.setCrefCoach(result.getString("crefCoach"));				
 		}
 		return coach;
 	}
 	
 	/**
-	 * Busca coach de acordo usuário
+	 * Busca coach de acordo com usuário
 	 */
 	public Coach selectCoach(GenericsDAO generics, User user) throws NoSuchFieldException, SecurityException, SQLException{					
 		this.fields = this.coaClas.getDeclaredFields();				
@@ -70,6 +68,7 @@ public class CoachBean extends UserBean implements Serializable {
 		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table);
 		Coach coach = this.resultSetCoach(result);
 		
+		// Se achar o coach e não tiver usuário setado
 		if(coach.getIdCoach() > 0){
 			coach.setIdUser(user.getIdUser());
 			coach.setNameUser(user.getNameUser());
@@ -88,7 +87,20 @@ public class CoachBean extends UserBean implements Serializable {
 	
 	private Coach loadCoach(){
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-		Coach coach = (Coach)session.getAttribute("coachLogged");
+		User user = (User) session.getAttribute("userLogged");
+		Coach coach = new Coach();
+		
+		try(Connection connection = new ConnectionFactory().getConnection()){									
+			// Cria GenericsDAO e Update Usuário
+			GenericsDAO generics = new GenericsDAO(connection);
+			
+			coach = this.selectCoach(generics, user);
+			
+		}
+		catch(Exception e){
+			FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage(e.getMessage().toString()));
+		}
+		
 		return coach; 
 	}
 	

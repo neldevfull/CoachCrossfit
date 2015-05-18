@@ -19,10 +19,10 @@
 				styleClass="_list-container">
 				<p:column>  
 					<h:commandLink value="#{student.nameUser}" styleClass="_list-content"
-						action="#{studentBean.loadStudent(student, '/screen/students/StudentMenu?faces-redirect=true')}"/>
+						action="#{studentBean.loadStudent(student, '/manager/students/StudentMenu?faces-redirect=true')}"/>
 				</p:column>
 				<p:column>					
-					<p:commandButton action="#{studentBean.loadStudent(student, '/screen/students/StudentReg?faces-redirect=true')}"
+					<p:commandButton action="#{studentBean.loadStudent(student, '/manager/students/StudentReg?faces-redirect=true')}"
 						icon="fa fa-cloud-upload" styleClass="_list-button"/>
 				</p:column> 
 			</h:dataTable>
@@ -31,7 +31,7 @@
 	
 	<ui:define name="_footer">	
 		<h:form> 								
-			<p:commandButton id="btn_cadastrar" action="#{studentBean.loadStudent('/screen/students/StudentReg?faces-redirect=true')}" 
+			<p:commandButton id="btn_cadastrar" action="#{studentBean.loadStudent('/manager/students/StudentReg?faces-redirect=true')}" 
 					icon="ui-icon-circle-check" value="Novo Aluno" styleClass="btn btn-lg _btn-registering _confirm"/>
 		</h:form>	
 	</ui:define>

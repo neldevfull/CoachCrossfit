@@ -3,17 +3,13 @@ package br.com.coachcrossfit.beans.user;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.xml.bind.ValidationException;
-
 import br.com.coachcrossfit.database.GenericsDAO;
-import br.com.coachcrossfit.models.Student;
 import br.com.coachcrossfit.models.User;
 import br.com.coachcrossfit.reflections.Reflections;
 import br.com.coachcrossfit.utilities.Util;

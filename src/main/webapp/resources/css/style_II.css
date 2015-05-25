@@ -16,19 +16,51 @@
 }
  
 /* Estilo para as telas principais */
+._img-logo {
+	width: 80%;
+}
+
+._message {	
+	float:left;
+	margin-bottom: 5%;
+}
+
+._message-default {
+	clear: both !important;
+	padding-bottom: 8%;
+}
+
+._container-datatable {
+	width: 100%;
+	float:left;
+	margin: 2.5% 0;
+}
+
 ._screen-title {
 	width: 100%;
 	height: 30%; 	
-	border-bottom: 1px dashed white;
+	border-bottom: 1px solid #F9F9F9;
 	float:left;
 	text-align: left;
 	font-size:1.5em;	
 	color: #255e8c;
 }
 
+._sub-title {
+	color: #d21515;
+}
+
+._list{
+	color: #255e8c;
+}
+
 .tableFirstLine {    
     background: none repeat scroll 0 0 #F9F9F9;
     border-top: 1px solid #BBBBBB;
+}
+
+.tableFirstLine td { 
+  width: 80%;
 }
  
 .tableNextLine {
@@ -43,18 +75,37 @@
 }
 ._list-content{
 	float:left;
+	color: #092e49;
+}
+._list-content-table{
+	float:left;
+	font-size:0.8em
 }
 ._list-button{
 	float: right;
 	background-color: white;
 	border: none;
 }
-
+ 
 /* PrimeFaces estilo modificado */
 /* Botões */
-.ui-button-icon-only .ui-icon.fa{
-	color: #255E8C !important;
+
+.fa-arrow-circle-o-up{
+	color: #50A250 !important;
 }
+
+.fa-arrow-circle-o-down{
+	color: #DB4E4A !important; 
+}
+
+.fa-thumbs-o-up{
+	color: #50A250 !important;
+}
+
+.fa-thumbs-o-down {
+	color: #DB4E4A !important;
+}
+
 .ui-button-icon-only .ui-icon.fa, .ui-button-text-icon-left .ui-icon.fa, .ui-button-text-icon-right .ui-icon.fa {
   background-color: transparent !important;
 }
@@ -82,10 +133,12 @@
 }
 
 /* Estilo para icones e botões */
+/*
 .fa{
 	background-color: #337AB7 !important;
 	color: white !important;
 }
+*/
 ._img-background{
 	background-image:url(#{request.contextPath}/resources/images/Background.jpg);
 }
@@ -157,6 +210,7 @@
 	*	[End]
 	*/
 	footer{
+		clear: both !important;
 		width: 100% !important;		
 		position: absolute;
 		bottom: 0;	

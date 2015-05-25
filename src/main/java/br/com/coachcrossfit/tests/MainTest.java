@@ -24,7 +24,7 @@ public class MainTest {
 		
 		try{
 			//mt.idStudentSearch();
-			mt.testJoinDuble();
+			//mt.testJoinDuble();
 		}
 		catch(Exception e){
 			System.out.println(e.getMessage());

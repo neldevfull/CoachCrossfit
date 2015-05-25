@@ -9,8 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.coachcrossfit.database.ConnectionFactory;
-import br.com.coachcrossfit.database.GenericsDAO;
+import br.com.coachcrossfit.database.connections.ConnectionFactory;
+import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
 import br.com.coachcrossfit.models.Student;
 
 @ManagedBean
@@ -23,7 +23,7 @@ public class StudentsBean {
 	public StudentsBean() {
 		try(Connection connection = new ConnectionFactory().getConnection()){
 			GenericsDAO generics = new GenericsDAO(connection);
-			this.students = this.studentBean.studentsList(students, generics);
+			this.students = this.studentBean.studentsList(this.students, generics);
 		}		
 		catch(Exception e){
 			System.out.println(e.getMessage());
@@ -32,7 +32,7 @@ public class StudentsBean {
 	}
 	
 	public List<Student> getStudents() {
-		return students;
+		return this.students;
 	}
 
 	public void setStudents(List<Student> students) {

@@ -1,4 +1,4 @@
-package br.com.coachcrossfit.tests;
+package br.com.coachcrossfit.tests; 
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -12,8 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import br.com.coachcrossfit.database.ConnectionFactory;
-import br.com.coachcrossfit.database.GenericsDAO;
+import br.com.coachcrossfit.database.connections.ConnectionFactory;
+import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
 import br.com.coachcrossfit.models.Coach;
 import br.com.coachcrossfit.models.Student;
 import br.com.coachcrossfit.models.User;
@@ -73,39 +73,39 @@ public class MethodsTests {
 		}
 	}
 
-	public void testJoinDuble() {
-		try (Connection connection = new ConnectionFactory().getConnection()) {
-			GenericsDAO generics = new GenericsDAO(connection);
-
-			List<String> fields = new ArrayList<String>();
-			fields.add("*");
-
-			List<String> fieldsConditions = new ArrayList<String>();
-			//fieldsConditions.add("idUser");
-
-			List<Object> valuesConditions = new ArrayList<Object>();
-			//valuesConditions.add(53);
-
-			List<String> joinsConditions = new ArrayList<String>();
-			joinsConditions.add("idUser");
-
-			String join = " INNER JOIN ";
-			String tableA = "tb_user";
-			String tableB = "tb_student";
-			String conditions = " ORDER BY idStudent DESC ";
-
-			ResultSet result = generics.joinDuble(fields, fieldsConditions,
-					valuesConditions, joinsConditions, join, tableA, tableB,
-					conditions);
-
-			while (result.next()) {
-				System.out.println(result.getString("nameStudent"));
-			}
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-	}
+//	public void testJoinDuble() {
+//		try (Connection connection = new ConnectionFactory().getConnection()) {
+//			GenericsDAO generics = new GenericsDAO(connection);
+//
+//			List<String> fields = new ArrayList<String>();
+//			fields.add("*");
+//
+//			List<String> fieldsConditions = new ArrayList<String>();
+//			//fieldsConditions.add("idUser");
+//
+//			List<Object> valuesConditions = new ArrayList<Object>();
+//			//valuesConditions.add(53);
+//
+//			List<String> joinsConditions = new ArrayList<String>();
+//			joinsConditions.add("idUser");
+//
+//			String join = " INNER JOIN ";
+//			String tableA = "tb_user";
+//			String tableB = "tb_student";
+//			String conditions = " ORDER BY idStudent DESC ";
+//
+//			ResultSet result = generics.joinDouble(fields, fieldsConditions,
+//					valuesConditions, joinsConditions, join, tableA, tableB,
+//					conditions);
+//
+//			while (result.next()) {
+//				System.out.println(result.getString("nameStudent"));
+//			}
+//
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//	}
 
 	public void passGer() {
 		Date dateBirth = new Date();

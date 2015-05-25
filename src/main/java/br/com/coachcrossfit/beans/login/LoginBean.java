@@ -8,9 +8,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
 import br.com.coachcrossfit.beans.user.UserBean;
-import br.com.coachcrossfit.database.ConnectionFactory;
-import br.com.coachcrossfit.database.GenericsDAO;
+import br.com.coachcrossfit.database.connections.ConnectionFactory;
+import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
 import br.com.coachcrossfit.models.User;
 import br.com.coachcrossfit.validations.Validations;
 

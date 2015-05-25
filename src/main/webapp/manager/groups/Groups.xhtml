@@ -1,11 +1,42 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">ALunos</ui:define>
+	
+	 <ui:define name="_header">
+		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1>
+	</ui:define>
+	
+	<ui:define name="_content">
+		<p:outputLabel value="Grupos" styleClass="_screen-title"/>
+		<h:form id="frmGroup">
+			<h:dataTable value="#{groupsBean.groups}" var="group" id="tableGroups"
+				rowClasses="tableFirstLine,tableNextLine" styleClass="_list-container">
+				<p:column>  
+					<h:commandLink value="#{group.nameGroup}" styleClass="_list-content"
+						action="#{groupBean.loadGroup(group, '/manager/groups/Group?faces-redirect=true')}"/>
+				</p:column>
+				<p:column>					
+					<p:commandButton icon="fa fa-thumbs-o-up" styleClass="_list-button"
+						rendered="#{group.statusGroup == 1}" action="#{groupBean.updateStatus(group, 2)}"
+						process="@all" update="frmGroup"/>						
+					<p:commandButton icon="fa fa-thumbs-o-down" styleClass="_list-button"
+						rendered="#{group.statusGroup == 0}" action="#{groupBean.updateStatus(group, 1)}"
+						process="@all" update="frmGroup"/>												  
+				</p:column> 
+			</h:dataTable>
+		</h:form>			
+	</ui:define>
+	
+	<ui:define name="_footer">	
+		<h:form> 								
+			<p:commandButton id="btn_cadastrar" action="#{groupBean.loadGroup('/manager/groups/Group?faces-redirect=true')}"   
+				icon="ui-icon-circle-check" value="Novo Grupo" styleClass="btn btn-lg _btn-registering _confirm"/>
+		</h:form>	
+	</ui:define>
+		
+</ui:composition>   

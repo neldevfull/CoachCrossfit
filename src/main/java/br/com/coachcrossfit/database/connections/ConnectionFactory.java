@@ -1,4 +1,4 @@
-package br.com.coachcrossfit.database;
+package br.com.coachcrossfit.database.connections;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

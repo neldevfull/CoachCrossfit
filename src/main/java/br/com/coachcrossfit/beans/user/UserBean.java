@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.xml.bind.ValidationException;
-import br.com.coachcrossfit.database.GenericsDAO;
+
+import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
 import br.com.coachcrossfit.models.User;
 import br.com.coachcrossfit.reflections.Reflections;
 import br.com.coachcrossfit.utilities.Util;
@@ -56,7 +58,7 @@ public class UserBean {
 		String pass = util.hashPass(user.getPassUser());
 		this.valuesConditions.add(pass); 
 		
-		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table);
+		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table, "");
 		
 		user = this.resultSetUser(result);
 		
@@ -69,7 +71,7 @@ public class UserBean {
 	/**
 	 * Todos os registros de determinado usuário	 
 	 */
-	public User resultSetUser(ResultSet result) throws SQLException{
+	private User resultSetUser(ResultSet result) throws SQLException{
 		User user = new User();
 		while(result.next()){
 			user.setIdUser(result.getInt("idUser"));

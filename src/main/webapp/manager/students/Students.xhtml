@@ -18,12 +18,14 @@
 				emptyMessage="Nenhum aluno cadastrado" rowClasses="tableFirstLine,tableNextLine"
 				styleClass="_list-container">
 				<p:column>  
-					<h:commandLink value="#{student.nameUser}" styleClass="_list-content"
+					<h:commandLink value="#{student.nameUserAbb}" styleClass="_list-content"
 						action="#{studentBean.loadStudent(student, '/manager/students/StudentMenu?faces-redirect=true')}"/>
 				</p:column>
 				<p:column>					
 					<p:commandButton action="#{studentBean.loadStudent(student, '/manager/students/StudentReg?faces-redirect=true')}"
-						icon="fa fa-cloud-upload" styleClass="_list-button"/>
+						icon="fa fa-arrow-circle-o-up" styleClass="_list-button" rendered="#{student.statusUser == 1}"/>
+					<p:commandButton action="#{studentBean.loadStudent(student, '/manager/students/StudentReg?faces-redirect=true')}"
+						icon="fa fa-arrow-circle-o-down" styleClass="_list-button" rendered="#{student.statusUser == 2}"/>
 				</p:column> 
 			</h:dataTable>
 		</h:form>			

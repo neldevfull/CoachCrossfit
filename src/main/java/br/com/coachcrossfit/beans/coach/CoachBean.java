@@ -15,8 +15,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import br.com.coachcrossfit.beans.user.UserBean;
-import br.com.coachcrossfit.database.ConnectionFactory;
-import br.com.coachcrossfit.database.GenericsDAO;
+import br.com.coachcrossfit.database.connections.ConnectionFactory;
+import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
 import br.com.coachcrossfit.models.Coach;
 import br.com.coachcrossfit.models.User;
 
@@ -43,7 +43,7 @@ public class CoachBean extends UserBean implements Serializable {
 	/**
 	 * Busca informação do coach
 	 */
-	public Coach resultSetCoach(ResultSet result) throws SQLException{
+	private Coach resultSetCoach(ResultSet result) throws SQLException{
 		Coach coach = new Coach();
 		while(result.next()){
 			coach.setIdCoach(result.getInt("idCoach"));		
@@ -65,7 +65,7 @@ public class CoachBean extends UserBean implements Serializable {
 		
 		this.valuesConditions.add(user.getIdUser());
 		
-		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table);
+		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table, "");
 		Coach coach = this.resultSetCoach(result);
 		
 		// Se achar o coach e não tiver usuário setado
@@ -85,7 +85,7 @@ public class CoachBean extends UserBean implements Serializable {
 		return coach;
 	}
 	
-	private Coach loadCoach(){
+	public Coach loadCoach(){
 		HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		User user = (User) session.getAttribute("userLogged");
 		Coach coach = new Coach();

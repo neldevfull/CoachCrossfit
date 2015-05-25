@@ -23,58 +23,24 @@
 	<f:selectItem itemLabel="Status Inativo" itemValue="0"/> 
 </p:selectOneMenu>
 
-BOTÃO PERTENCE A TELA STUDENTCAD.XHTML
-<p:commandButton icon="fa fa-user" type="button" value="Alunos" styleClass="_input-style btn btn-lg btn-primary"/>
+DEVERÁ SER IMPLEMENTADO NA TELA DO ALUNO PARA CAPTURA DE SUA IMAGEM
+Qualquer dúvida utilizar o histório em: 25/05/2015 12:00
 
-BOTÃO PERTENCE A TELA LOGIN.XHTML
-<!--  <p:commandButton value="Entrar" styleClass="btn btn-lg btn-primary _input-style" 
-						action="#{loginBean.login}"/> --> 
-						
-						
-<!-- 
+<p:graphicImage library="images" name="Perfil.png" styleClass="_img-profile" 
+	onclick="PF('imgDialog').show(); return false;" rendered="#{not studentImg.photoCapture}"/>  
+<p:graphicImage value="#{studentImg.photoContent}" styleClass="_img-cam" cache="false"
+	onclick="PF('imgDialog').show(); return false;" rendered="#{studentImg.photoCapture}"/>
+	
+<p:dialog widgetVar="imgDialog" header="Perfil Aluno" modal="true" resizable="false">
+	<h:panelGrid>
+		<p:photoCam widgetVar="camera" format="jpeg"
+			listener="#{studentImg.capturePhoto}" 
+			update="studentImg" />
+		<p:commandLink value="Capturar Foto" onclick="PF('camera').capture(); return false;"/>
+	</h:panelGrid>
+</p:dialog>	
 
-<p:commandButton action="#{studentBean.loadStudent(student, '/screen/students/StudentReg?faces-redirect=true')}"
-							icon="fa fa-cloud-upload" styleClass="_list-button"/>
-
-- DEVER SER IMPLEMENTADO EM STUDENTBEAN.JAVA
-
-//	private boolean selectStudent(GenericsDAO generics) throws NoSuchFieldException, SQLException, NoSuchAlgorithmException, UnsupportedEncodingException {
-//		boolean success = false;
-//		ResultSet result;
-//		List<Object> valuesConditions = new ArrayList<Object>();
-//		List<String> fields = new ArrayList<String>();
-//		List<String> fieldsConditions = new ArrayList<String>();
-//		List<String> joinsConditions = new ArrayList<String>();	
-//		String join = "INNER JOIN", tableA = "tb_user", tableB = "tb_student";
-//		
-//		fields.add("*");
-//		fieldsConditions.add("emailUser");
-//		fieldsConditions.add("passUser");
-//		
-//		valuesConditions.add(this.student.getUser().getEmailUser());
-//		
-//		// Gera hash da senha
-//		String pass = studentBean.util.hashPass(this.student.getUser().getPassUser());
-//		valuesConditions.add(pass);
-//		
-//		joinsConditions.add("idUser");
-//		
-//		result = generics.joinDuble(fields, fieldsConditions, valuesConditions, joinsConditions, join, tableA, tableB);
-//		
-//		if(result.last()){
-//			// Chama método para carregar aluno		
-//			this.studentBean.resultSetStudent(this.student, result);
-//			success = true;
-//		}
-//				
-//		result.close();
-//		generics.closeStatement();
-//		
-//		return success;
-//	}
-
-
- -->
+-->
 
 
 </body>

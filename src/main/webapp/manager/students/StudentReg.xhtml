@@ -16,20 +16,9 @@
 			<p class="_touch-img">Toque na imagem para alterá-la</p>									
 			<div class="_img-border">
 				<h:panelGroup id="studentImg">
-					<p:graphicImage library="images" name="Perfil.png" styleClass="_img-profile" 
-						onclick="PF('imgDialog').show(); return false;" rendered="#{not studentImg.photoCapture}"/>  
-					<p:graphicImage value="#{studentImg.photoContent}" styleClass="_img-cam" cache="false"
-						onclick="PF('imgDialog').show(); return false;" rendered="#{studentImg.photoCapture}"/>
+					<p:graphicImage library="images" name="Perfil.png" styleClass="_img-profile"/> 
 				</h:panelGroup> 
-			</div>							 
-			<p:dialog widgetVar="imgDialog" header="Perfil Aluno" modal="true" resizable="false">
-				<h:panelGrid>
-					<p:photoCam widgetVar="camera" format="jpeg"
-						listener="#{studentImg.capturePhoto}" 
-						update="studentImg" />
-					<p:commandLink value="Capturar Foto" onclick="PF('camera').capture(); return false;"/>
-				</h:panelGrid>
-			</p:dialog>			
+			</div>		
 			<p:inputText id="nameStudent" value="#{studentBean.student.nameUser}"  
 				placeholder="Nome" styleClass="form-control input-lg input-sm _input-style _record-student"
 				required="true" requiredMessage="Nome é obrigatório"

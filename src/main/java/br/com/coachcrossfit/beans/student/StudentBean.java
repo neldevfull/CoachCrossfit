@@ -18,10 +18,9 @@ import javax.faces.context.FacesContext;
 
 import br.com.coachcrossfit.beans.coach.CoachBean;
 import br.com.coachcrossfit.beans.user.UserBean;
-import br.com.coachcrossfit.database.ConnectionFactory;
-import br.com.coachcrossfit.database.GenericsDAO;
+import br.com.coachcrossfit.database.connections.ConnectionFactory;
+import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
 import br.com.coachcrossfit.models.Student;
-import br.com.coachcrossfit.models.User;
 import br.com.coachcrossfit.reflections.Reflections;
 import br.com.coachcrossfit.validations.Validations;
   
@@ -40,6 +39,7 @@ public class StudentBean extends UserBean implements Serializable{
 	private String conditions;
 	private List<String> fieldsList;
 	private List<String> joinsConditions;
+	private List<String> joinsConditionsC;
 	private List<String> fieldsConditions;
 	private Field[] fields;
 	private List<Object> values;	
@@ -56,6 +56,7 @@ public class StudentBean extends UserBean implements Serializable{
 		this.conditions       = "";
 		this.fieldsList       = new ArrayList<String>();
 		this.joinsConditions  = new ArrayList<String>();
+		this.joinsConditionsC = new ArrayList<String>();
 		this.fieldsConditions = new ArrayList<String>();
 		this.values           = new ArrayList<Object>();		
 		this.valuesConditions = new ArrayList<Object>();			
@@ -158,17 +159,17 @@ public class StudentBean extends UserBean implements Serializable{
 	/**
 	 * Busca registro de determinado aluno	 
 	 */
-	public Student resultSetStudent(Student student, ResultSet result) throws SQLException{
-		 while(result.next()){			
-			student.setIdStudent(result.getInt("idStudent")); 
-			student.setIdUser(result.getInt("idUser"));
-			student.setIdCoach(result.getInt("idCoach"));			
-			student.setWeightStudent(result.getFloat("weightStudent"));
-			student.setDateBirthStudent(result.getDate("dateBirthStudent"));
-			student.setHeightStudent(result.getFloat("heightStudent"));			
-		 }		 
-		 return student;
-	}
+//	private Student resultSetStudent(Student student, ResultSet result) throws SQLException{
+//		 while(result.next()){			
+//			student.setIdStudent(result.getInt("idStudent")); 
+//			student.setIdUser(result.getInt("idUser"));
+//			student.setIdCoach(result.getInt("idCoach"));			
+//			student.setWeightStudent(result.getFloat("weightStudent"));
+//			student.setDateBirthStudent(result.getDate("dateBirthStudent"));
+//			student.setHeightStudent(result.getFloat("heightStudent"));			
+//		 }		 
+//		 return student;
+//	}
 	
 	private List<Student> resultSetStudents(List<Student> students, ResultSet result) throws SQLException{
 		while(result.next()){
@@ -242,33 +243,33 @@ public class StudentBean extends UserBean implements Serializable{
 	/**
 	 * Seleciona um aluno	 
 	 */
-	public Student selectStudent(GenericsDAO generics, User user) throws NoSuchFieldException, SecurityException, SQLException{				 
-		// Atribui valores 
-		this.fields = this.stuClas.getDeclaredFields();
-		Field[] fieldsConditions = { super.userClas.getDeclaredField("idUser") };
-		
-		if(this.valuesConditions.size() > 0)
-			this.valuesConditions.clear();
-		
-		this.valuesConditions.add(user.getIdUser());
-		
-		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table);				
-		this.resultSetStudent(this.student, result);
-		
-		if(this.student.getIdStudent() > 0){
-			this.student.setIdUser(user.getIdUser());
-			this.student.setNameUser(user.getNameUser());
-			this.student.setEmailUser(user.getEmailUser());
-			this.student.setPassUser(user.getPassUser());
-			this.student.setTypeUser(user.getTypeUser());
-			this.student.setStatusUser(user.getStatusUser());
-			this.student.setGenderUser(user.getGenderUser());
-		}
-						
-		this.fullClose(result, generics);
-						
-		return this.student;
-	}
+//	public Student selectStudent(GenericsDAO generics, User user) throws NoSuchFieldException, SecurityException, SQLException{				 
+//		// Atribui valores 
+//		this.fields = this.stuClas.getDeclaredFields();
+//		Field[] fieldsConditions = { super.userClas.getDeclaredField("idUser") };
+//		
+//		if(this.valuesConditions.size() > 0)
+//			this.valuesConditions.clear();
+//		
+//		this.valuesConditions.add(user.getIdUser());
+//		
+//		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table);				
+//		this.resultSetStudent(this.student, result);
+//		
+//		if(this.student.getIdStudent() > 0){
+//			this.student.setIdUser(user.getIdUser());
+//			this.student.setNameUser(user.getNameUser());
+//			this.student.setEmailUser(user.getEmailUser());
+//			this.student.setPassUser(user.getPassUser());
+//			this.student.setTypeUser(user.getTypeUser());
+//			this.student.setStatusUser(user.getStatusUser());
+//			this.student.setGenderUser(user.getGenderUser());
+//		}
+//						
+//		this.fullClose(result, generics);
+//						
+//		return this.student;
+//	}
 
 	/**
 	 * inseri usuário
@@ -304,22 +305,24 @@ public class StudentBean extends UserBean implements Serializable{
 		if(this.fieldsList.size() > 0)
 			this.fieldsList.clear();		
 		this.fieldsList.add("*");
-		// Não haverá condição
+		// Carrega condição
 		if(this.fieldsConditions.size() > 0)
 			this.fieldsConditions.clear();
-		// Limpa valores de condição
+		this.fieldsConditions.add(this.table+".idCoach");
+		// Carrega valores de condição
 		if(this.valuesConditions.size() > 0)
 			this.valuesConditions.clear();
+		this.valuesConditions.add(this.coachBean.loadCoach().getIdCoach());
 		// Condição de junção
 		if(this.joinsConditions.size() > 0)
 			this.joinsConditions.clear();
 		// Atribui a condição de junção ao usuário
 		this.joinsConditions.add("idUser");
-		this.conditions = " ORDER BY idStudent DESC ";
+		this.conditions = " ORDER BY statusUser ASC, idStudent DESC ";
 		
-		ResultSet result = generics.joinDuble(this.fieldsList, this.fieldsConditions, this.valuesConditions,
-											  this.joinsConditions, this.join, super.table, this.table,
-											  this.conditions);		
+		ResultSet result = generics.join(this.fieldsList, this.fieldsConditions, this.valuesConditions,
+									     this.joinsConditions, this.joinsConditionsC, this.join, super.table, this.table, "",
+									     this.conditions);		
 
 		students = this.resultSetStudents(students, result);		
 		this.fullClose(result, generics);

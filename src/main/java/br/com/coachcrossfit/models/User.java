@@ -21,6 +21,11 @@ public class User {
 	public String getNameUser() {
 		return nameUser;
 	}
+	
+	public String getNameUserAbb(){
+		String[] fullName = nameUser.split(" ");
+		return fullName[0] + " " + fullName[1]; 
+	}
 
 	public void setNameUser(String nameUser) {
 		this.nameUser = nameUser;

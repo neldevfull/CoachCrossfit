@@ -1,4 +1,4 @@
-package br.com.coachcrossfit.database;
+package br.com.coachcrossfit.database.dao.generics;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -15,42 +15,58 @@ public class GenericsDAO {
 	/**
 	 * Atributo responsável pela conexão e declaração SQL
 	 */
-	private Connection connection = null;
-	private PreparedStatement statement = null;
+	protected Connection connection = null;
+	protected PreparedStatement statement = null;
+	protected ResultSet resultSet = null;
+	protected String sql = "";
 	
 	public GenericsDAO(Connection connection) {
 		this.connection = connection;
 	}
 	
-	public ResultSet joinDuble(List<String> fields, List<String> fieldsConditions, List<Object> valuesConditions, 
-			 List<String> joinsConditions, String join, String tableA, String tableB, String conditions) throws SQLException{
+	public ResultSet join(List<String> fields, List<String> fieldsConditions, List<Object> valuesConditions, 
+			 List<String> joinsConditions, List<String> joinsConditionsC, String join, 
+			 String tableA, String tableB, String tableC, String conditions) throws SQLException{
 		String sql = "";
 		String joinConditions = "";
+		String joinConditionsC = "";
 		String fieldConditions = "";
 		String condition = "";
+		String conditionC = "";
 		
 		for(String field : fields){
 			sql += sql == "" ? "SELECT " + field : ", " + field;
 		}
 		
+		// Faz JOIN duplo
 		for(String fieldJoin :  joinsConditions){
 			condition  = tableA + "." + fieldJoin + " = " + tableB + "." + fieldJoin;
 			joinConditions += joinConditions == "" ? " FROM " + tableA + " " +join + " " + tableB + " ON " + condition : " AND " +  condition;
 		}
+		
+		// Faz JOIN triplo 
+		if(!tableC.equals("")){
+			for (String fieldJoinC : joinsConditionsC) {
+				conditionC = tableB + "." + fieldJoinC + " = " + tableC + "." + fieldJoinC;
+				joinConditionsC += joinConditionsC == "" ? join + tableC + " ON " +conditionC : " AND " + conditionC;
+			}			
+			joinConditions += joinConditionsC;
+		}
 
+		// Atribui condições
 		if(fieldsConditions.size() > 0){
 			for(String field : fieldsConditions){
-				fieldConditions += fieldConditions == "" ? " WHERE " + tableA + "." + field + " = ?" : " AND " + tableA + "." + field + " = ?";
+				fieldConditions += fieldConditions == "" ? " WHERE " + field + " = ?" : " AND " + field + " = ?";
 			}
 		}
 		
 		sql += joinConditions + fieldConditions + conditions;
 		
 		this.statement = this.connection.prepareStatement(sql);
-		loadStatement(valuesConditions, statement);
+		loadStatement(valuesConditions, this.statement);
 		
 		try{			
-			ResultSet result = statement.executeQuery(); 			
+			ResultSet result = this.statement.executeQuery(); 			
 			return result;
 		}
 		catch(Exception e){
@@ -162,7 +178,8 @@ public class GenericsDAO {
 		
 	}
 	
-	public ResultSet select(Field[] fields, Field[] fieldsConditions, List<Object> valuesConditions, String table) throws SQLException{			
+	public ResultSet select(Field[] fields, Field[] fieldsConditions, List<Object> valuesConditions, String table,
+						    String conditions) throws SQLException{			
 		String sql = "";		
 		String fieldConditions = "";
 		
@@ -174,7 +191,7 @@ public class GenericsDAO {
 			fieldConditions += fieldConditions == "" ? " FROM " + table + " WHERE " + field.getName() + " = ?" : " AND " + field.getName() + " = ?";
 		}
 		
-		sql += fieldConditions;
+		sql += fieldConditions+" "+conditions;
 		this.statement = this.connection.prepareStatement(sql);
 		loadStatement(valuesConditions, statement);
 		
@@ -213,7 +230,7 @@ public class GenericsDAO {
 				
 	}
 	
-	private PreparedStatement loadStatement(List<Object> values, PreparedStatement statement) throws SQLException{
+	protected PreparedStatement loadStatement(List<Object> values, PreparedStatement statement) throws SQLException{
 		int count = 1;
 		for (Object value : values) {			
 			if(value instanceof Integer){
@@ -243,13 +260,25 @@ public class GenericsDAO {
 	}
 	
 	/**
-	 * Fecha a declaração ao banco de dados
-	 * @throws SQLException
+	 * Fecha a declaração ao banco de dados	  
 	 */
 	public void closeStatement() throws SQLException{
 		try{
 			if (this.statement != null)
 				this.statement.close();			
+		}
+		catch(Exception e){
+			throw new SQLException("Falha durane a operação com o banco de dados");
+		}
+	}
+	
+	/**
+	 * Fecha o ResultSet	 
+	 */
+	protected void closeResultSet() throws SQLException{
+		try{
+			if(this.resultSet != null)
+				this.resultSet.close();
 		}
 		catch(Exception e){
 			throw new SQLException("Falha durane a operação com o banco de dados");

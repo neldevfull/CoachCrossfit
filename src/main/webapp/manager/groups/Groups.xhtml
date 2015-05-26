@@ -22,11 +22,9 @@
 				</p:column>
 				<p:column>					
 					<p:commandButton icon="fa fa-thumbs-o-up" styleClass="_list-button"
-						rendered="#{group.statusGroup == 1}" action="#{groupBean.updateStatus(group, 2)}"
-						process="@all" update="frmGroup"/>						
+						rendered="#{group.statusGroup == 1}" action="#{groupBean.updateStatus(group, 2)}"/>						
 					<p:commandButton icon="fa fa-thumbs-o-down" styleClass="_list-button"
-						rendered="#{group.statusGroup == 0}" action="#{groupBean.updateStatus(group, 1)}"
-						process="@all" update="frmGroup"/>												  
+						rendered="#{group.statusGroup == 2}" action="#{groupBean.updateStatus(group, 1)}"/>												  
 				</p:column> 
 			</h:dataTable>
 		</h:form>			

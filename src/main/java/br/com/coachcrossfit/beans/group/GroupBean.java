@@ -189,12 +189,18 @@ public class GroupBean implements Serializable {
 			this.ajaxInsertStudentGroup(students);
 			
 			// Commit para que haja atomicidade dos dados
-			connection.commit();	
+			connection.commit();
+			
+			// Busca dados do grupo após cadastro
+			this.selectGroup(generics, idGroup);
 			
 			// Mensagem Sucesso!
 			FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage("Cadastrado com Sucesso!"));
 		}
 		catch(Exception e){
+			/**
+			 * IMPLEMENTAR LOG
+			 */
 			FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage(e.getMessage().toString()));			
 		}
 	}
@@ -229,7 +235,7 @@ public class GroupBean implements Serializable {
 			
 			// Commit para que haja atomicidade dos dados
 			connection.commit();
-			
+									
 			FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage("Grupo alterado com Sucesso!"));	
 			
 		}
@@ -238,6 +244,47 @@ public class GroupBean implements Serializable {
 		}
 	}
 	
+	/**
+	 * Busca dados do grupo
+	 */
+	private void selectGroup(GenericsDAO generics, int idGroup) throws NoSuchFieldException, SecurityException, SQLException{
+		// Busca todos os campos
+		this.compareClass.clear();
+		this.compareClass.add("students");
+		this.fields = gruRef.getAllFields(this.gruClas, this.compareClass);
+		
+		// Atribui o campo idGroup para condição
+		Field field = gruClas.getDeclaredField("idGroup");
+		Field[] fieldsConditions = { field };
+		
+		// Adiciona o valor idGroup
+		this.valuesConditions.clear();
+		this.valuesConditions.add(idGroup);
+								
+		this.conditions = "";
+		
+		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table, this.conditions);
+		this.resulSetGroup(generics, result);
+		
+		this.fullClose(generics, result);
+	}
+	
+	/**
+	 * Busca alunos do grupo	 
+	 */
+	private void resulSetGroup(GenericsDAO generics, ResultSet result) throws SQLException{
+		while(result.next()){
+			this.group.setIdGroup(result.getInt("idGroup"));
+			this.group.setIdCoach(result.getInt("idCoach"));
+			this.group.setNameGroup(result.getString("nameGroup"));
+			this.group.setStatusGroup(result.getInt("statusGroup"));
+			this.group.setStudents(this.selectListStudent(this.group.getIdGroup(), generics));
+		}		
+	}
+	
+	/**
+	 * Deleta aluno(s) do grupo para que seja atualizado na tela
+	 */
 	private void ajaxDeleteStudentGroup(List<Student> students){
 		for(Student student : students){						
 			for(GroupStudent groupStudent : this.groupStudents){

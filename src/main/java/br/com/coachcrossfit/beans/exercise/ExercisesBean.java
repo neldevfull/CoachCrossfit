@@ -1,4 +1,4 @@
-package br.com.coachcrossfit.beans.exercises;
+package br.com.coachcrossfit.beans.exercise;
 
 import java.sql.Connection;
 import java.util.LinkedList;

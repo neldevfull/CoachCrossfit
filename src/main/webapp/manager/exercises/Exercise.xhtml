@@ -1,0 +1,30 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">Cadastro Exercício</ui:define>
+	
+	<ui:define name="_header">
+		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1>
+	</ui:define>
+	
+	<ui:define name="_content">
+		<h:form id="exerciseCad">	
+			<p:outputLabel value="Exercícios" styleClass="_screen-title"/>		 										
+			<p:inputText id="nameExercise" value="#{exerciseBean.exercise.nameExercise}"  
+				placeholder="Nome" styleClass="form-control input-lg input-sm _input-style _record-student"
+				required="true" requiredMessage="Nome é obrigatório"
+				validator="#{groupBean.validations.validateName}"/>									
+		</h:form>			 
+	</ui:define>
+	
+	<ui:define name="_footer">
+		<p:messages autoUpdate="true" id="messages" styleClass="_message-default"/>				 			
+		<p:commandButton  icon="ui-icon-circle-check" action="#{exerciseBean.exerciseMain}"
+			value="Salvar!" styleClass="btn btn-lg _btn-registering _confirm" update="exerciseCad"/>		  
+	</ui:define>
+		
+</ui:composition>  

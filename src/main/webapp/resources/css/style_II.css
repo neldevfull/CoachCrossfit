@@ -106,6 +106,10 @@
 	color: #DB4E4A !important;
 }
 
+.fa-remove {
+	color: #bf1300 !important;
+}
+
 .ui-button-icon-only .ui-icon.fa, .ui-button-text-icon-left .ui-icon.fa, .ui-button-text-icon-right .ui-icon.fa {
   background-color: transparent !important;
 }
@@ -218,7 +222,7 @@
 	}	
 	._btn-registering{
 		width: 100% !important;		
-		height: 6.5% !important;
+		height: 7% !important;
 		background-color: #d31515;
 		color: white !important;
 		border-color: none !important;	

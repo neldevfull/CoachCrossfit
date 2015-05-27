@@ -78,7 +78,7 @@ public class Reflections<T> {
 	}
 
 	/**
-	 * Busca todos os campos do Bean e retorna-os menos o id da Classe
+	 * Busca todos os campos menos o id da Classe
 	 */
 	public Field[] getAllLessId(Class<T> object){		
 		int count = 0;

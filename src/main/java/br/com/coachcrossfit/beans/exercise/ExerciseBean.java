@@ -2,7 +2,7 @@ package br.com.coachcrossfit.beans.exercise;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -12,7 +12,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.coachcrossfit.beans.coach.CoachBean;
 import br.com.coachcrossfit.database.connections.ConnectionFactory;
-import br.com.coachcrossfit.database.dao.exercises.ExerciseDAO;
+import br.com.coachcrossfit.database.dao.exercise.ExerciseDAO;
 import br.com.coachcrossfit.models.Exercise;
 import br.com.coachcrossfit.validations.Validations;
 
@@ -24,12 +24,12 @@ public class ExerciseBean implements Serializable{
 	private Exercise exercise;
 	private List<Exercise> exercises;
 	private ExerciseDAO exerciseDAO;
-	private Validations validation;
+	private Validations validations;
 	
 	public ExerciseBean() {
 		this.exercise 	= new Exercise();
-		this.exercises  = new LinkedList<Exercise>();		
-		this.validation = new Validations();
+		this.exercises  = new ArrayList<Exercise>();	
+		this.validations = new Validations();
 	}
 	
 	/**
@@ -103,6 +103,10 @@ public class ExerciseBean implements Serializable{
 		}
 		return "/manager/exercises/Exercises.xhtml?faces-redirect=true";
 	}
+	
+	public void setExercise(Exercise exercise) {
+		this.exercise = exercise;
+	}
 
 	public Exercise getExercise() {
 		return exercise;
@@ -112,8 +116,8 @@ public class ExerciseBean implements Serializable{
 		return exercises;
 	}
 
-	public Validations getValidation() {
-		return validation;
+	public Validations getValidations() {
+		return validations;
 	}
 		
 }

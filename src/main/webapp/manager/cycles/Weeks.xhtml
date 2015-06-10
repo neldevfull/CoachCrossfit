@@ -1,0 +1,37 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">Semanas</ui:define>
+	
+	 <ui:define name="_header">
+		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1>
+	</ui:define>
+	
+	<ui:define name="_content">
+		<p:outputLabel value="Semanas" styleClass="_screen-title"/>
+		<h:form id="frmWeeks">
+			<h:dataTable value="#{cycleBean.cycle.weeks}" var="week" id="tableWeeks"
+				rowClasses="tableFirstLine,tableNextLine" styleClass="_list-container">
+				<p:column>  
+					<h:commandLink value="#{week.nameWeek}" styleClass="_list-content"
+						action="#{cycleBean.loadCalendar(week, '/manager/cycles/Calendar?faces-redirect=true')}"/>
+				</p:column>
+				<p:column>					
+					<p:commandButton icon="fa fa-thumbs-o-up" styleClass="_list-button"/>																							  
+				</p:column> 
+			</h:dataTable>
+		</h:form>			
+	</ui:define>
+	
+	<ui:define name="_footer">	
+		<h:form> 								
+			<p:commandButton id="btn_cadaster" icon="ui-icon-circle-check"
+				value="Nova Semana" styleClass="btn btn-lg _btn-registering _confirm"/>
+		</h:form>	
+	</ui:define>
+		
+</ui:composition>   

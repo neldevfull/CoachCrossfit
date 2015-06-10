@@ -18,7 +18,7 @@ import javax.faces.context.FacesContext;
 import br.com.coachcrossfit.beans.coach.CoachBean;
 import br.com.coachcrossfit.database.connections.ConnectionFactory;
 import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
-import br.com.coachcrossfit.database.dao.students.StudentDAO;
+import br.com.coachcrossfit.database.dao.student.StudentDAO;
 import br.com.coachcrossfit.models.Coach;
 import br.com.coachcrossfit.models.Group;
 import br.com.coachcrossfit.models.GroupStudent;

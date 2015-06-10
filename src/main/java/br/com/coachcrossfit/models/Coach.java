@@ -1,12 +1,14 @@
 package br.com.coachcrossfit.models;
 
+import br.com.coachcrossfit.utilities.GetFields;
+
 public class Coach extends User {
 
 	private int idCoach;
-	// Utilizado apenas na reflection	
-	@SuppressWarnings("unused")
+	@GetFields
 	private int idUser;
-	private String crefCoach;		
+	@GetFields
+	private String crefCoach;	
 	
 	public int getIdCoach() {
 		return idCoach;

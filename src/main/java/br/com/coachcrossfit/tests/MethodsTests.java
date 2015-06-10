@@ -14,7 +14,6 @@ import java.util.Locale;
 
 import br.com.coachcrossfit.database.connections.ConnectionFactory;
 import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
-import br.com.coachcrossfit.models.Coach;
 import br.com.coachcrossfit.models.Student;
 import br.com.coachcrossfit.models.User;
 import br.com.coachcrossfit.reflections.Reflections;

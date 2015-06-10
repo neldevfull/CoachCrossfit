@@ -1,7 +1,12 @@
 package br.com.coachcrossfit.tests;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -10,15 +15,66 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.validator.ValidatorException;
 import javax.xml.bind.ValidationException;
 
 import br.com.coachcrossfit.beans.student.StudentBean;
+import br.com.coachcrossfit.models.Cycle;
 import br.com.coachcrossfit.models.Student;
 import br.com.coachcrossfit.models.User;
 import br.com.coachcrossfit.reflections.Reflections;
+import br.com.coachcrossfit.utilities.GetFields;
+import br.com.coachcrossfit.utilities.Util;
 
 public class MainTest {
 	public static void main(String[] args){
+		
+		Util util = new Util();		
+		Date date = new Date();
+		System.out.println(date);
+		date = util.calculateWeek(date, Long.parseLong("4"));
+		System.out.println(date);
+		
+		/*
+		Instant instant = Instant.ofEpochMilli(new Date().getTime());
+		LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+		
+		System.out.println(localDate);
+		
+		System.out.println(localDate.plusWeeks(4));
+		
+		for(int i = 0; i < 4; i++){
+			localDate = localDate.plusDays(7);
+			System.out.println(localDate);
+		}
+		
+		
+		Field[] fields = Cycle.class.getDeclaredFields();
+		
+		for (Field field : fields) {
+			if(field.isAnnotationPresent(GetFields.class)){
+				System.out.println(field.getName());
+			}
+		}
+		
+		Cycle cycle = new Cycle();
+		cycle.setIdCoach(1);
+		
+		System.out.println(cycle.getIdCoach());
+		
+		
+		 Pattern pattern;
+		 Matcher matcher;
+		
+		String textArea = "Nelson $%%¨&"
+				+ "M"; 
+		// Verificação		
+		pattern = Pattern.compile("[a-zA-Z âÂãÃáÁàÀêÊéÉèÈíÍìÌôÔõÕóÓòÒúÚùÙûÛçÇ]{3,150}"); 
+		matcher = pattern.matcher(textArea);
+		
+		if(!matcher.matches()) 
+			System.out.println("Erro 1");
 							
 		MethodsTests mt = new MethodsTests(); 
 		
@@ -29,6 +85,7 @@ public class MainTest {
 		catch(Exception e){
 			System.out.println(e.getMessage());
 		}
+		/*
 		
 		//mt.testJoinDuble();
 		

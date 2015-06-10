@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.coachcrossfit.beans.coach.CoachBean;
 import br.com.coachcrossfit.database.connections.ConnectionFactory;
-import br.com.coachcrossfit.database.dao.exercises.ExerciseDAO;
+import br.com.coachcrossfit.database.dao.exercise.ExerciseDAO;
 import br.com.coachcrossfit.models.Exercise;
 
 @ManagedBean

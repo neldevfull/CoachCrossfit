@@ -19,6 +19,7 @@ import br.com.coachcrossfit.database.connections.ConnectionFactory;
 import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
 import br.com.coachcrossfit.models.Coach;
 import br.com.coachcrossfit.models.User;
+import br.com.coachcrossfit.utilities.GetFields;
 
 @ManagedBean
 @ViewScoped
@@ -29,15 +30,20 @@ public class CoachBean extends UserBean implements Serializable {
 	private String nameUser;
 	private Class<Coach> coaClas;
 	private String table;
-	private Field[] fields;	
+	private List<String> fields;
+	private List<String> fieldsConditions;
 	private List<Object> valuesConditions;
+	private String conditions;
 	
 	public CoachBean() {		
-		this.nameUser = "";		
-		this.coaClas = Coach.class;
-		this.table   = "tb_coach";		
-		this.valuesConditions = new ArrayList<Object>();		
-		this.coach = this.loadCoach();
+		this.nameUser 		  = "";		
+		this.coaClas 		  = Coach.class;
+		this.table   		  = "tb_coach";	
+		this.fields 		  = new ArrayList<String>();
+		this.fieldsConditions = new ArrayList<String>();
+		this.valuesConditions = new ArrayList<Object>();
+		this.conditions 	  = "";
+		this.coach 			  = this.loadCoach();		
 	}
 	
 	/**
@@ -56,16 +62,18 @@ public class CoachBean extends UserBean implements Serializable {
 	/**
 	 * Busca coach de acordo com usuário
 	 */
-	public Coach selectCoach(GenericsDAO generics, User user) throws NoSuchFieldException, SecurityException, SQLException{					
-		this.fields = this.coaClas.getDeclaredFields();				
-		Field[] fieldsConditions = { super.userClas.getDeclaredField("idUser") };
+	public Coach selectCoach(GenericsDAO generics, User user) throws NoSuchFieldException, SecurityException, SQLException{							
+		this.loadFields(coaClas);
 		
+		this.fieldsConditions.clear();
+		this.fieldsConditions.add("idUser");
+				
 		if(this.valuesConditions.size() > 0)
 			this.valuesConditions.clear();
 		
-		this.valuesConditions.add(user.getIdUser());
+		this.valuesConditions.add(user.getIdUser());		
 		
-		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table, "");
+		ResultSet result = generics.select(this.fields, this.fieldsConditions, this.valuesConditions, this.table, this.conditions);
 		Coach coach = this.resultSetCoach(result);
 		
 		// Se achar o coach e não tiver usuário setado
@@ -83,6 +91,18 @@ public class CoachBean extends UserBean implements Serializable {
 		generics.closeStatement();
 		
 		return coach;
+	}
+	
+	/**
+	 * Loads fields according to annotation GetFields
+	 */
+	private void loadFields(Class<?> classGenerics){		
+		this.fields.clear();
+		this.fields.add("idCoach");
+		for(Field field : classGenerics.getDeclaredFields()){
+			if(field.isAnnotationPresent(GetFields.class))
+				this.fields.add(field.getName());
+		}
 	}
 	
 	public Coach loadCoach(){

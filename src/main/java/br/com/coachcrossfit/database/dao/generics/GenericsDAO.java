@@ -101,6 +101,32 @@ public class GenericsDAO {
 	}
 	
 	/**
+	 * Faz a inserção de dados de maneira genêrica
+	 */
+	public void insert(List<String> fields, List<Object> values, String table) throws SQLException{
+		// Monta a declaração
+		String sql = "INSERT INTO " + table + " (";
+		String parameter = "";
+		int count = 0;
+		
+		for (String field : fields) {
+			sql += count == 0 ? field : "," + field;
+			parameter += count == 0 ? "?" : ",?";			 
+			count++;
+		}
+		
+		try(PreparedStatement statement = this.connection.prepareStatement(sql+") VALUES ("+parameter+")")){								
+			loadStatement(values, statement);			
+			statement.executeUpdate();
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			throw new SQLException("Falha ao inserir no banco de dados");
+		}
+		
+	}
+	
+	/**
 	 * Faz a inserção de dados e retorna id
 	 */
 	public int insertReturnId(Field[] fields, List<Object> values, String table) throws SQLException{
@@ -112,6 +138,39 @@ public class GenericsDAO {
 		
 		for (Field field : fields) {
 			sql += count == 0 ? field.getName() : "," + field.getName();
+			parameter += count == 0 ? "?" : ",?";			 
+			count++;
+		}
+		
+		try(PreparedStatement statement = this.connection.prepareStatement(sql+") VALUES ("+parameter+")", Statement.RETURN_GENERATED_KEYS)){								
+			loadStatement(values, statement);			
+			statement.executeUpdate();
+			
+			ResultSet result = statement.getGeneratedKeys();
+			while(result.next()){
+				idUser = result.getInt(1);
+			}
+			return idUser;   
+		}
+		catch(Exception e){
+			System.out.println(e.getMessage());
+			throw new SQLException("Falha ao inserir no banco de dados");
+		}
+		
+	}
+	
+	/**
+	 * Faz a inserção de dados e retorna id
+	 */
+	public int insertReturnId(List<String> fields, List<Object> values, String table) throws SQLException{
+		int idUser = 0;
+		// Monta a declaração
+		String sql = "INSERT INTO " + table + " (";
+		String parameter = "";
+		int count = 0;
+		
+		for (String field : fields) {
+			sql += count == 0 ? field : "," + field;
 			parameter += count == 0 ? "?" : ",?";			 
 			count++;
 		}
@@ -151,6 +210,7 @@ public class GenericsDAO {
 			statement.executeUpdate();
 		}
 		catch(Exception e){
+			System.out.println(e.getMessage());
 			throw new SQLException("Falha ao deletar registro(s) no(s) banco de dados");
 		}
 		
@@ -178,6 +238,28 @@ public class GenericsDAO {
 		
 	}
 	
+	public ResultSet select(List<String> fields, String table, String conditions) throws SQLException{			
+		String sql = "SELECT ";
+		String fieldsSelect = "";
+		
+		for (String field : fields) {
+			fieldsSelect += fieldsSelect == "" ? field : ","+field;
+		}
+		
+		sql += conditions != "" ? fieldsSelect + " FROM " + table + conditions :
+			fieldsSelect + " FROM " + table;
+		this.statement = this.connection.prepareStatement(sql);
+		
+		try{			
+			ResultSet result = statement.executeQuery(); 			
+			return result;
+		}
+		catch(Exception e){
+			throw new SQLException("Falha ao selecionar registros no banco de dados");
+		}	
+		
+	}
+	
 	public ResultSet select(Field[] fields, Field[] fieldsConditions, List<Object> valuesConditions, String table,
 						    String conditions) throws SQLException{			
 		String sql = "";		
@@ -189,6 +271,33 @@ public class GenericsDAO {
 				
 		for (Field field : fieldsConditions) {
 			fieldConditions += fieldConditions == "" ? " FROM " + table + " WHERE " + field.getName() + " = ?" : " AND " + field.getName() + " = ?";
+		}
+		
+		sql += fieldConditions+" "+conditions;
+		this.statement = this.connection.prepareStatement(sql);
+		loadStatement(valuesConditions, statement);
+		
+		try{			
+			ResultSet result = statement.executeQuery(); 			
+			return result;
+		}
+		catch(Exception e){
+			throw new SQLException("Falha ao selecionar registros no banco de dados");
+		}	
+		
+	}
+	
+	public ResultSet select(List<String> fields, List<String> fieldsConditions, List<Object> valuesConditions, String table,
+			String conditions) throws SQLException{			
+		String sql = "";		
+		String fieldConditions = "";
+		
+		for (String field : fields) {
+			sql += sql == "" ? "SELECT " + field : ","+field;
+		}
+		
+		for (String field : fieldsConditions) {
+			fieldConditions += fieldConditions == "" ? " FROM " + table + " WHERE " + field + " = ?" : " AND " + field + " = ?";
 		}
 		
 		sql += fieldConditions+" "+conditions;
@@ -283,6 +392,10 @@ public class GenericsDAO {
 		catch(Exception e){
 			throw new SQLException("Falha durane a operação com o banco de dados");
 		}
+	}
+	
+	public Connection getConnection() {
+		return connection;
 	}
 
 }

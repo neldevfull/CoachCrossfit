@@ -1,5 +1,6 @@
 package br.com.coachcrossfit.beans.student;  
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -17,6 +18,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.coachcrossfit.beans.coach.CoachBean;
+import br.com.coachcrossfit.beans.cycle.CycleBean;
 import br.com.coachcrossfit.beans.user.UserBean;
 import br.com.coachcrossfit.database.connections.ConnectionFactory;
 import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
@@ -155,22 +157,7 @@ public class StudentBean extends UserBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage(e.getMessage().toString()));			
 		}			
 	}
-	
-	/**
-	 * Busca registro de determinado aluno	 
-	 */
-//	private Student resultSetStudent(Student student, ResultSet result) throws SQLException{
-//		 while(result.next()){			
-//			student.setIdStudent(result.getInt("idStudent")); 
-//			student.setIdUser(result.getInt("idUser"));
-//			student.setIdCoach(result.getInt("idCoach"));			
-//			student.setWeightStudent(result.getFloat("weightStudent"));
-//			student.setDateBirthStudent(result.getDate("dateBirthStudent"));
-//			student.setHeightStudent(result.getFloat("heightStudent"));			
-//		 }		 
-//		 return student;
-//	}
-	
+
 	private List<Student> resultSetStudents(List<Student> students, ResultSet result) throws SQLException{
 		while(result.next()){
 			Student student = new Student();	
@@ -208,6 +195,13 @@ public class StudentBean extends UserBean implements Serializable{
 		this.student = new Student();
 		return url;
 	}
+	
+	public String loadCycle(String url) throws IOException{		
+		CycleBean.setNrStudentORGroup(this.student.getIdStudent());
+		// Type Student for Cycle
+		CycleBean.setTypeCycle(1);
+		return url; 
+	}
 	 	
 	/**
 	 * Atribui valor aos campos nulos
@@ -240,37 +234,6 @@ public class StudentBean extends UserBean implements Serializable{
 		generics.insert(this.fields, this.values, this.table);
 	}
 	
-	/**
-	 * Seleciona um aluno	 
-	 */
-//	public Student selectStudent(GenericsDAO generics, User user) throws NoSuchFieldException, SecurityException, SQLException{				 
-//		// Atribui valores 
-//		this.fields = this.stuClas.getDeclaredFields();
-//		Field[] fieldsConditions = { super.userClas.getDeclaredField("idUser") };
-//		
-//		if(this.valuesConditions.size() > 0)
-//			this.valuesConditions.clear();
-//		
-//		this.valuesConditions.add(user.getIdUser());
-//		
-//		ResultSet result = generics.select(this.fields, fieldsConditions, this.valuesConditions, this.table);				
-//		this.resultSetStudent(this.student, result);
-//		
-//		if(this.student.getIdStudent() > 0){
-//			this.student.setIdUser(user.getIdUser());
-//			this.student.setNameUser(user.getNameUser());
-//			this.student.setEmailUser(user.getEmailUser());
-//			this.student.setPassUser(user.getPassUser());
-//			this.student.setTypeUser(user.getTypeUser());
-//			this.student.setStatusUser(user.getStatusUser());
-//			this.student.setGenderUser(user.getGenderUser());
-//		}
-//						
-//		this.fullClose(result, generics);
-//						
-//		return this.student;
-//	}
-
 	/**
 	 * inseri usuário
 	 */

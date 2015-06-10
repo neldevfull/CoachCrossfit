@@ -1,0 +1,41 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">Cadastro Ciclo</ui:define>
+	
+	<ui:define name="_header">
+		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1> 
+	</ui:define>
+	
+	<ui:define name="_content">
+		<h:form id="cycleCad">		
+			<p:outputLabel value="Ciclo" styleClass="_screen-title"/>	 			
+			<p:inputText id="nameCycle" value="#{cycleBean.cycle.nameCycle}"  
+				placeholder="Nome do Ciclo" styleClass="form-control input-lg input-sm _input-style _record-student"
+				required="true" requiredMessage="Nome é obrigatório"
+				validator="#{cycleBean.validations.validateName}"/>
+			<p:calendar id="dateIniCycle" value="#{cycleBean.cycle.dateIniCycle}" 
+				placeholder="Data de Início" requiredMessage="Data de início é obrigatória"
+				required="true" validator="#{cycleBean.validations.validateDate}" pattern="dd/MM/yyyy"/>
+		    <p:inputText id="periodCycle" value="#{cycleBean.periodCycle}"
+		    	placeholder="Período em semanas" styleClass="form-control input-lg input-sm _input-style _record-student"
+		    	required="true" requiredMessage="Período é obrigatório"/>				
+			<p:inputText id="paymentCycle" value="#{cycleBean.paymentCycle}"   
+				placeholder="Valor do Ciclo" styleClass="form-control input-lg input-sm _input-style _record-student"
+				requiredMessage="Valor é obrigatório" required="true"/>
+			<p:inputTextarea id="desCycle" value="#{cycleBean.cycle.desCycle}" rows="5"
+				placeholder="Descrição" validator="#{cycleBean.validations.validateTextArea}"/>			
+			<p:messages autoUpdate="true" id="messages" style="margin: -7% 0 0 0"/>				
+		</h:form>	
+	</ui:define>
+	
+	<ui:define name="_footer">	
+		<p:commandButton action="#{cycleBean.cycleCad('/manager/cycles/Weeks?faces-redirect=true')}" icon="ui-icon-circle-check"
+			value="Salvar!" styleClass="btn btn-lg _btn-registering _confirm" update=":cycleCad"/>
+	</ui:define>
+		
+</ui:composition>  

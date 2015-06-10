@@ -1,0 +1,31 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">Semanas</ui:define>
+	
+	 <ui:define name="_header">
+		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1>
+	</ui:define>
+	
+	<ui:define name="_content">
+		<p:outputLabel value="Calendário" styleClass="_screen-title" style="margin-top: -15%"/>
+		<h:form id="frmCalendar" style="margin-top: 15%">
+			<p:calendar mode="inline" pattern="dd/MM/yyyy" locale="pt"
+				maxdate="#{cycleBean.week.dateEndWeek}" mindate="#{cycleBean.week.dateIniWeek}">
+				<p:ajax event="dateSelect" listener="#{cycleBean.onDateSelect}"/>
+			</p:calendar>
+		</h:form>			
+	</ui:define>
+	
+	<ui:define name="_footer">	
+		<h:form> 								
+			<p:commandButton id="btn_backWeeks" icon="ui-icon-circle-check"
+				value="Voltar a Semanas" styleClass="btn btn-lg _btn-registering _confirm"/>
+		</h:form>	
+	</ui:define>
+		
+</ui:composition>   

@@ -46,8 +46,15 @@
 	color: #255e8c;
 }
 
+._large-title {
+	color: #102f47;
+	font-size: 1.8em;
+	border-bottom: 1px solid #102f47;
+}
+
 ._sub-title {
 	color: #d21515;
+	float: left;
 }
 
 ._list{
@@ -85,6 +92,9 @@
 	float: right;
 	background-color: white;
 	border: none;
+}
+._small_button {
+	height: 1.3em;
 }
  
 /* PrimeFaces estilo modificado */
@@ -128,12 +138,48 @@
   margin-left: -2px;
 }
 
+/* CALENDAR MODIFICATE */
+.ui-datepicker .ui-datepicker-title {
+	width: 100% !important;
+	margin: 0 auto !important;
+	background-color: #cb0000;
+	color: #F2F2F2;
+}
+
+.ui-datepicker .ui-datepicker-prev { 
+	opacity: 100;	
+}
+
+.ui-datepicker .ui-datepicker-next {
+	opacity: 100;
+}
+
+.ui-datepicker .ui-datepicker-calendar
+.ui-state-default {
+	border: 1px solid #5F83B9;
+}
+
+/* INPUT MODIFICADA */
+.ui-inputfield {	
+	width: 100% !important;		
+	font-size: 1.2em !important;	
+	border-color: #7a7a7a;
+	margin: 2.5% 0 0 0 !important; 
+}
+.ui-selectonemenu label.ui-selectonemenu-label{
+	margin: 0 !important;	
+}
+	
 ._container-login{
 	margin: 5%;
 }
-._input-login{
-	margin:	1% 0 !important;
-	border-radius: 5px !important;  
+
+/* AUTOCOMPLET MODIFIED */
+.ui-autocomplete {			 
+	width: 110% !important;
+	margin: -3.5% 0 2.5% -5% !important;
+	background-color: transparent !important;
+	border: none !important;	
 }
 
 /* Estilo para icones e botões */
@@ -153,13 +199,15 @@
 		width: 100%;
 		height: 30%;
 		margin:	3% 0 1% 0 !important;
-	}
-	._record-student{
+		border-radius: 5px !important;
+		border-color: #7a7a7a !important;  		
+	}		
+	._record-student {
 		border-color: #7a7a7a;
 	}
-	._confirm{
+	._confirm {
 		background-color: #00a800 !important;
-	}	 
+	}	
 	/**	Style screen Login
 	*	[Start]
 	*/
@@ -230,10 +278,19 @@
 		bottom: 0;	
 		opacity: 0.9;
     	filter: alpha(opacity=90); /* For IE8 and earlier */
+	}
+	._btn_include {
+		margin-top: 2% !important;
+		width: 100% !important;
+		height: 4% !important;		
+		color: white !important;
+		border-color: none !important;
+		background-color: #f27900 !important; 
 	}	
 	.ui-icon{
 		background-color: white;
 	}
+
 }
 
 /* Caso o dispositivo esteja em modo paisagem */

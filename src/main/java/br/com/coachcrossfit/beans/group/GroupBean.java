@@ -1,5 +1,6 @@
 package br.com.coachcrossfit.beans.group; 
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -11,11 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.coachcrossfit.beans.coach.CoachBean;
+import br.com.coachcrossfit.beans.cycle.CycleBean;
 import br.com.coachcrossfit.database.connections.ConnectionFactory;
 import br.com.coachcrossfit.database.dao.generics.GenericsDAO;
 import br.com.coachcrossfit.database.dao.student.StudentDAO;
@@ -27,7 +29,7 @@ import br.com.coachcrossfit.reflections.Reflections;
 import br.com.coachcrossfit.validations.Validations;
 
 @ManagedBean
-@SessionScoped
+@ApplicationScoped 
 public class GroupBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -495,6 +497,16 @@ public class GroupBean implements Serializable {
 		this.fullClose(generics, result);
 		
 		return students;
+	}
+	
+	/**
+	 * Load Group for Cycle
+	 */
+	public String loadCycle(String url) throws IOException{		
+		CycleBean.setNrStudentORGroup(this.group.getIdGroup());
+		// Type Group for Cycle
+		CycleBean.setTypeCycle(2);
+		return url; 
 	}
 	
 	private void fullClose(GenericsDAO generics, ResultSet result) throws SQLException{

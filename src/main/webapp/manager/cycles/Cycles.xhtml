@@ -1,0 +1,38 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">Ciclos</ui:define>
+	
+	 <ui:define name="_header">
+		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1>
+	</ui:define>
+	
+	<ui:define name="_content">
+		<p:outputLabel value="Ciclos" styleClass="_screen-title"/>
+		<h:form>
+			<h:dataTable value="#{cyclesBean.cycles}" var="cycle"
+				emptyMessage="Nenhum Ciclo cadastrado" rowClasses="tableFirstLine,tableNextLine"
+				styleClass="_list-container">
+				<p:column>  
+					<h:commandLink value="#{cycle.nameCycle}" styleClass="_list-content"
+						action="#{cycleBean.loadWeeks(cycle, '/manager/cycles/Weeks?faces-redirect=true')}"/> 
+				</p:column>
+				<p:column>					
+					<p:commandButton icon="fa fa-circle-o" styleClass="_list-button _icon-cycle"
+						action="#{cycleBean.loadCycle(cycle, '/manager/cycles/Cycle?faces-redirect=true')}"/>					
+				</p:column> 
+			</h:dataTable>
+		</h:form>			
+	</ui:define>
+	
+	<ui:define name="_footer">			
+		<p:commandButton id="btn_cadastrar"  value="Novo Ciclo" icon="ui-icon-circle-check"
+			action="#{cycleBean.loadCycle('/manager/cycles/Cycle?faces-redirect=true')}"
+			styleClass="btn btn-lg _btn-registering _confirm"/>		
+	</ui:define>
+		
+</ui:composition>   

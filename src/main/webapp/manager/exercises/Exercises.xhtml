@@ -13,20 +13,22 @@
 	
 	<ui:define name="_content">
 		<p:outputLabel value="Exercícios" styleClass="_screen-title"/>
-		<h:form>
-			<h:dataTable value="#{exercisesBean.exercises}" var="exercise"
-				emptyMessage="Nenhum exercício cadastrado" rowClasses="tableFirstLine,tableNextLine"
-				styleClass="_list-container">
-				<p:column>  
-					<h:commandLink value="#{exercise.nameExercise}" styleClass="_list-content"
-						action="#{exerciseBean.loadExercise(exercise, '/manager/exercises/Exercise?faces-redirect=true')}"/>
-				</p:column>
-				<p:column>					
-					<p:commandButton icon="fa fa-remove" styleClass="_list-button"
-						action="#{exerciseBean.deleteExercise(exercise)}"/>						
-				</p:column> 
-			</h:dataTable>
-		</h:form>			
+		<div class="_exercise">
+			<h:form>
+				<h:dataTable value="#{exercisesBean.exercises}" var="exercise"
+					emptyMessage="Nenhum exercício cadastrado" rowClasses="tableFirstLine,tableNextLine"
+					styleClass="_list-container">
+					<p:column>  
+						<h:commandLink value="#{exercise.nameExercise}" styleClass="_list-content"
+							action="#{exerciseBean.loadExercise(exercise, '/manager/exercises/Exercise?faces-redirect=true')}"/>
+					</p:column>
+					<p:column>					
+						<p:commandButton icon="fa fa-remove" styleClass="_list-button"
+							action="#{exerciseBean.deleteExercise(exercise)}"/>						
+					</p:column> 
+				</h:dataTable>
+			</h:form>			
+		</div>
 	</ui:define>
 	
 	<ui:define name="_footer">	

@@ -46,7 +46,7 @@
 	color: #255e8c;
 }
 
-._large-title {
+._large-title {		
 	color: #102f47;
 	font-size: 1.8em;
 	border-bottom: 1px solid #102f47;
@@ -60,8 +60,9 @@
 ._list{
 	color: #255e8c;
 }
-
-.tableFirstLine {    
+  
+.tableFirstLine {  
+	width: 100%;
     background: none repeat scroll 0 0 #F9F9F9;
     border-top: 1px solid #BBBBBB;
 }
@@ -78,13 +79,14 @@
 	width: 100%;
 	padding: 2.5% 10%;
 	font-size: 1.5em;
-	margin-bottom: 10%;
+	margin-bottom: 5%;
 }
 ._list-content{
 	float:left;
 	color: #092e49;
 }
 ._list-content-table{
+	color: black;
 	float:left;
 	font-size:0.8em
 }
@@ -99,6 +101,9 @@
  
 /* PrimeFaces estilo modificado */
 /* Botões */
+.fa-circle-thin {
+	color: #50A250 !important;
+}
 
 .fa-arrow-circle-o-up{
 	color: #50A250 !important;
@@ -109,7 +114,7 @@
 }
 
 .fa-thumbs-o-up{
-	color: #50A250 !important;
+	color: #229ae5 !important;
 }
 
 .fa-thumbs-o-down {
@@ -118,6 +123,14 @@
 
 .fa-remove {
 	color: #bf1300 !important;
+}
+
+.fa-edit {
+	color: #229ae5;
+}
+
+._icon-cycle {
+	color: #229ae5 !important;
 }
 
 .ui-button-icon-only .ui-icon.fa, .ui-button-text-icon-left .ui-icon.fa, .ui-button-text-icon-right .ui-icon.fa {
@@ -139,6 +152,10 @@
 }
 
 /* CALENDAR MODIFICATE */
+._calendar {
+	width: 100% !important; 
+}
+
 .ui-datepicker .ui-datepicker-title {
 	width: 100% !important;
 	margin: 0 auto !important;
@@ -157,6 +174,11 @@
 .ui-datepicker .ui-datepicker-calendar
 .ui-state-default {
 	border: 1px solid #5F83B9;
+	padding: 20%;
+}
+
+._autocomplete{
+	margin: -4% 0 2% 0 !important; 
 }
 
 /* INPUT MODIFICADA */
@@ -164,7 +186,9 @@
 	width: 100% !important;		
 	font-size: 1.2em !important;	
 	border-color: #7a7a7a;
-	margin: 2.5% 0 0 0 !important; 
+	margin-top: -2% !important;
+	margin: 2% 0 0 0 !important;   
+	height: 112%;
 }
 .ui-selectonemenu label.ui-selectonemenu-label{
 	margin: 0 !important;	
@@ -182,13 +206,17 @@
 	border: none !important;	
 }
 
-/* Estilo para icones e botões */
-/*
-.fa{
-	background-color: #337AB7 !important;
-	color: white !important;
+/* TABLE MODIFIED */
+table {
+	width: 100% !important;
+	float: left !important;   
 }
-*/
+
+/* ROW TABLE*/
+.row{
+	margin-bottom: 10% !important;
+}
+
 ._img-background{
 	background-image:url(#{request.contextPath}/resources/images/Background.jpg);
 }
@@ -201,12 +229,18 @@
 		margin:	3% 0 1% 0 !important;
 		border-radius: 5px !important;
 		border-color: #7a7a7a !important;  		
-	}		
+	}	
+	._input-action{
+		margin:	-3% 0 1% 0 !important; 
+	}	
 	._record-student {
 		border-color: #7a7a7a;
 	}
 	._confirm {
 		background-color: #00a800 !important;
+	}
+	._btn_updte {
+		background-color: #f27d09;
 	}	
 	/**	Style screen Login
 	*	[Start]
@@ -261,14 +295,14 @@
 	/**	Style screen Home
 	*	[End]
 	*/
-	footer{
+	footer {
 		clear: both !important;
 		width: 100% !important;		
 		position: absolute;
 		bottom: 0;	
 		position: relative !important;
 	}	
-	._btn-registering{
+	._btn-registering {
 		width: 100% !important;		
 		height: 7% !important;
 		background-color: #d31515;
@@ -278,19 +312,18 @@
 		bottom: 0;	
 		opacity: 0.9;
     	filter: alpha(opacity=90); /* For IE8 and earlier */
-	}
+	}	
 	._btn_include {
 		margin-top: 2% !important;
-		width: 100% !important;
-		height: 4% !important;		
+		width: 100% !important;	
 		color: white !important;
 		border-color: none !important;
-		background-color: #f27900 !important; 
+		background-color: #1a88ad !important; 
 	}	
 	.ui-icon{
 		background-color: white;
 	}
-
+		
 }
 
 /* Caso o dispositivo esteja em modo paisagem */

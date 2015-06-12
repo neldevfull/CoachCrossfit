@@ -13,8 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.coachcrossfit.beans.coach.CoachBean;
@@ -27,11 +27,12 @@ import br.com.coachcrossfit.reflections.Reflections;
 import br.com.coachcrossfit.validations.Validations;
   
 @ManagedBean
-@SessionScoped
+@ApplicationScoped
 public class StudentBean extends UserBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Student student;
+	private String shortName;
 	private CoachBean coachBean;
 	private Validations validations;
 	private Reflections<Student> stuRef;	
@@ -196,6 +197,9 @@ public class StudentBean extends UserBean implements Serializable{
 		return url;
 	}
 	
+	/**
+	 * Load Student for Cycle
+	 */
 	public String loadCycle(String url) throws IOException{		
 		CycleBean.setNrStudentORGroup(this.student.getIdStudent());
 		// Type Student for Cycle
@@ -301,6 +305,12 @@ public class StudentBean extends UserBean implements Serializable{
 	
 	public Student getStudent() {
 		return student;
+	}
+	
+	public String getShortName() {
+		String[] name = this.student.getNameUser().split(" ");
+		this.shortName = name[0] + " " + name[1];
+		return this.shortName;
 	}
 	
 	public void setStudent(Student student) {

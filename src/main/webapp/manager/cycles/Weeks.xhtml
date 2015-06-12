@@ -16,22 +16,21 @@
 		<h:form id="frmWeeks">
 			<h:dataTable value="#{cycleBean.cycle.weeks}" var="week" id="tableWeeks"
 				rowClasses="tableFirstLine,tableNextLine" styleClass="_list-container">
-				<p:column>  
+				<p:column>  					
 					<h:commandLink value="#{week.nameWeek}" styleClass="_list-content"
-						action="#{cycleBean.loadCalendar(week, '/manager/cycles/Calendar?faces-redirect=true')}"/>
+						action="#{cycleBean.viewWeek(week, '/manager/cycles/Week?faces-redirect=true')}"/>						
 				</p:column>
 				<p:column>					
-					<p:commandButton icon="fa fa-thumbs-o-up" styleClass="_list-button"/>																							  
+					<p:commandButton icon="fa fa-edit" styleClass="_list-button"						
+						action="#{cycleBean.loadCalendar(week, '/manager/cycles/Calendar?faces-redirect=true')}"/>							 																					  
 				</p:column> 
 			</h:dataTable>
 		</h:form>			
 	</ui:define>
 	
-	<ui:define name="_footer">	
-		<h:form> 								
-			<p:commandButton id="btn_cadaster" icon="ui-icon-circle-check"
-				value="Nova Semana" styleClass="btn btn-lg _btn-registering _confirm"/>
-		</h:form>	
+	<ui:define name="_footer">
+		<p:commandButton value="Finalizar" action="#{cycleBean.loadCycle('/Manager?faces-redirect=true')}"
+			styleClass="btn btn-lg _btn-registering _confirm _btn_include"/>		 
 	</ui:define>
 		
 </ui:composition>   

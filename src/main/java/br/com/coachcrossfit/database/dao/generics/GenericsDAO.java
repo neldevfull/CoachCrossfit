@@ -24,6 +24,9 @@ public class GenericsDAO {
 		this.connection = connection;
 	}
 	
+	/**
+	 * Join Binary or Ternary
+	 */
 	public ResultSet join(List<String> fields, List<String> fieldsConditions, List<Object> valuesConditions, 
 			 List<String> joinsConditions, List<String> joinsConditionsC, String join, 
 			 String tableA, String tableB, String tableC, String conditions) throws SQLException{

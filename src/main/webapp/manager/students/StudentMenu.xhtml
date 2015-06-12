@@ -16,10 +16,10 @@
 			<div class="_img-border">
 				<h:graphicImage library="images" name="Perfil.png" styleClass="_img-profile"/>
 			</div>   
-			<p class="label-name">Atléta: <SPAN><p:outputLabel value="#{studentBean.student.nameUser}"/></SPAN></p>
+			<p class="label-name">Atléta: <SPAN><p:outputLabel value="#{studentBean.shortName}"/></SPAN></p>
 			<p:commandButton icon="fa fa-cubes" type="button" value="Dados Pessoais	" styleClass="_input-style btn btn-lg btn-primary"/>
 			<p:commandButton icon="fa fa-trophy" type="button" value="Personal Records" styleClass="_input-style btn btn-lg btn-primary"/>
-			<p:commandButton action="#{studentBean.loadCycle('/manager/cycles/Cycle?faces-redirect=true')}"
+			<p:commandButton action="#{studentBean.loadCycle('/manager/cycles/Cycles?faces-redirect=true')}"
 				icon="fa fa-circle-o" value="Cíclos" styleClass="_input-style btn btn-lg btn-primary"/>		
 			<p:commandButton icon="fa fa-file-o" type="button" value="Relatórios" styleClass="_input-style btn btn-lg btn-primary"/>
 			<p:commandButton icon="fa fa-line-chart" type="button" value="Gráficos" styleClass="_input-style btn btn-lg btn-primary"/>

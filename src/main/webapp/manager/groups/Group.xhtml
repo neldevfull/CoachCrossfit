@@ -3,7 +3,8 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions">
     
     <ui:define name="titulo">Cadastro Grupo</ui:define>
 	
@@ -25,7 +26,7 @@
 				<h:dataTable value="#{groupBean.groupStudents}" var="groupStudent" rendered="#{not groupBean.renderStudent}"  
 					rowClasses="tableFirstLine,tableNextLine" styleClass="_list-container"> 
 					<p:column>					  
-						<h:outputLabel value="#{groupStudent.student.nameUser}" styleClass="_list-content-table"/>
+						<h:outputLabel value="#{fn:substring(groupStudent.student.nameUser, 0, 25)}" styleClass="_list-content-table"/> 
 					</p:column>
 					<p:column>					
 						<p:selectBooleanCheckbox value="#{groupStudent.statusGroupStudent}"/>																									
@@ -37,7 +38,7 @@
 				<h:dataTable value="#{groupBean.studentsNoGroup}" var="student"  
 					rowClasses="tableFirstLine,tableNextLine" styleClass="_list-container" > 
 					<p:column>  
-						<h:outputLabel value="#{student.nameUser}" styleClass="_list-content-table"/>
+						<h:outputLabel value="#{fn:substring(student.nameUser, 0, 25)}" styleClass="_list-content-table"/>						
 					</p:column>
 					<p:column>					
 						<h:selectBooleanCheckbox value="#{groupBean.checkedStudentNo[student.idStudent]}"/>

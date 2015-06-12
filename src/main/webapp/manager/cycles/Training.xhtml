@@ -21,13 +21,15 @@
 				required="true" requiredMessage="Nome é obrigatório"
 				validator="#{cycleBean.validations.validateName}"/>				
 			<p:outputLabel value="Exercício" styleClass="_screen-title _list"/>
-			<p:autoComplete id="exercise" value="#{cycleBean.exerciseTraining}"
-				completeMethod="#{cycleBean.suggestExercises}" placeholder="Exercício" 
-				validator="#{cycleBean.validations.validateString}"
-				styleClass="form-control input-lg input-sm "/>
+			<div class="_autocomplete">
+				<p:autoComplete id="exercise" value="#{cycleBean.exerciseTraining}"
+					completeMethod="#{cycleBean.suggestExercises}" placeholder="Exercício" 
+					validator="#{cycleBean.validations.validateString}"
+					styleClass="form-control input-lg input-sm"/>
+			</div>  
 			<p:inputText value="#{cycleBean.actionTraining}" placeholder="Ação"				
 				validator="#{cycleBean.validations.validateString}"
-				styleClass="form-control input-lg input-sm _input-style _record-student"/>
+				styleClass="form-control input-lg input-sm _input-action _input-style _record-student"/>
 			<p:commandButton action="#{cycleBean.trainingAdd}" icon="fa fa-plus"
 				 styleClass="btn btn-lg _btn_include _confirm" value="Adicionar"
 				 update="@form" /> 
@@ -36,15 +38,19 @@
 				<h:dataTable id="listTraining" value="#{cycleBean.day.trainings}" var="training"
 					rowClasses="tableFirstLine,tableNextLine" styleClass="_list-container" > 
 					<p:column>  
-						<h:outputLabel escape="false" styleClass="_list-content-table" 
-							value="#{fn:substring(training.exerciseTraining.concat(' - ').concat(training.actionTraining), 0, 30)}"/>
+						<p:commandLink styleClass="_list-content-table" oncomplete="PF('viewTraining').show(); return false;" 
+							action="#{cycleBean.clicked(training)}" update="@form"
+							value="#{fn:substring(training.exerciseTraining.concat(' - ').concat(training.actionTraining), 0, 25)}"/>
 					</p:column>
 					<p:column>					
 						<p:commandButton icon="fa fa-remove" styleClass="_list-button _small_button" 
 							action="#{cycleBean.removeTraining(training)}" process="@this" update=":trainingCad"/>   
 					</p:column>
 				</h:dataTable>
-			</div>											
+			</div>	
+			<p:dialog id="trainingClicked" widgetVar="viewTraining" header="Exercício" modal="true" resizable="false">
+				<p:outputLabel value="#{cycleBean.trainingClicked}"/>
+			</p:dialog>										
 		</h:form>	
 	</ui:define>
 	

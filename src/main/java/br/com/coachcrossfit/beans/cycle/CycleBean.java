@@ -1,4 +1,4 @@
-package br.com.coachcrossfit.beans.cycle;
+package br.com.coachcrossfit.beans.cycle; 
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -32,7 +32,7 @@ import br.com.coachcrossfit.utilities.Util;
 import br.com.coachcrossfit.validations.Validations;
 
 @ManagedBean 
-@SessionScoped
+@ApplicationScoped
 public class CycleBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -48,8 +48,9 @@ public class CycleBean implements Serializable{
 	private String actionTraining;
 	private Date dateDay;
 	private CycleDAO cycleDAO;
-	private static int nrStudentORGroup;
-	private static int typeCycle;
+	private static int nrStudentORGroup;	
+	private static int typeCycle;	
+	private String trainingClicked;
 	private boolean isUpdate;	
 	private String labelDate;
 	private String periodCycle;
@@ -68,10 +69,37 @@ public class CycleBean implements Serializable{
 	}
 	
 	/**
-	 * Main Method
+	 * Load Cycle for insert
 	 */
-	public String cycleMain(String url){
-		//this.cycleCad();
+	public String loadCycle(String url){
+		this.cycle = new Cycle(); 
+		this.periodCycle  = "";
+		this.paymentCycle = ""; 					
+		return url;
+	}
+	
+	/**
+	 * Load Cycle for update
+	 */
+	public String loadCycle(Cycle cycle, String url){
+		this.cycle = cycle;
+		this.paymentCycle = Float.toString(this.cycle.getPaymentCycle()); 				
+		return url;
+	}
+	
+	/**
+	 * Load Weeks
+	 */
+	public String loadWeeks(Cycle cycle, String url){		
+		this.cycle = cycle;
+		try(Connection connection = new ConnectionFactory().getConnection()){
+			// Connection for GenericsDAO
+			this.cycleDAO = new CycleDAO(connection);	
+			this.cycle.setWeeks(this.cycleDAO.seekWeeks(this.cycle, this.cycle.getWeeks()));			
+		}		
+		catch(Exception e){											
+			System.out.println(e.getMessage());
+		}		
 		return url;
 	}
 	
@@ -119,6 +147,26 @@ public class CycleBean implements Serializable{
 	} 
 	
 	/**
+	 * Update Cycle
+	 */
+	public void cycleUp(){
+		try(Connection connection = new ConnectionFactory().getConnection()){
+			// Connection for GenericsDAO
+			this.cycleDAO = new CycleDAO(connection);	
+			
+			this.cycle.setPaymentCycle(Float.parseFloat(this.paymentCycle));
+			
+			this.cycleDAO.cycleUp(cycle);
+			
+			FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage("Alterado com Sucesso!"));
+		}		
+		catch(Exception e){						
+			FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage("Falha ao alterar Ciclo"));		
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	/**
 	 * Insert or Update Day and Trainings
 	 */
 	public void trainingCad(){ 
@@ -157,7 +205,9 @@ public class CycleBean implements Serializable{
 		this.training.setActionTraining(this.actionTraining);
 		// Add Training in Day and Day in Week
 		this.day.getTrainings().add(this.training);
-		this.week.getDays().add(this.day);	
+		// Add Day in Week if action is three
+		if(!this.week.getDays().contains(this.day)) 
+			this.week.getDays().add(this.day);	
 		// Add Training in TrainingUp if different null
 		if(this.isUpdate)
 			this.trainingUp.put(1, this.training);
@@ -199,9 +249,14 @@ public class CycleBean implements Serializable{
 	/**
 	 * Set date ini and end
 	 */
-	public String loadCalendar(Week week, String url){
+	public String loadCalendar(Week week, String url){			
+		// When insert
 		if(this.cycle.getWeeks().contains(week))
 			this.week = week;
+		// When update
+		if(this.cycle.getWeeks().get(week.getNrWeek() - 1).getDays().size() == 0)
+			this.seekTrainings(week);
+		
 		return url;
 	}
 	
@@ -286,6 +341,29 @@ public class CycleBean implements Serializable{
 	}
 	
 	/**
+	 * View Week
+	 */
+	public String viewWeek(Week week, String url){		
+		if(this.cycle.getWeeks().get(week.getNrWeek() - 1).getDays().size() == 0){
+			this.seekTrainings(week);			
+		}	
+		this.week = week;
+		return url;
+	}
+
+	private void seekTrainings(Week week) {
+		try(Connection connection = new ConnectionFactory().getConnection()){
+			// Connection for GenericsDAO
+			this.cycleDAO = new CycleDAO(connection);	
+			
+			this.cycleDAO.seekTrainings(week);																		
+		}		
+		catch(Exception e){								
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	/**
 	 * Suggest Exercises
 	 */
 	public List<String> suggestExercises(String suggest){		
@@ -314,7 +392,7 @@ public class CycleBean implements Serializable{
 			// IMPLEMENTAR LOG
 			System.out.println(e.getMessage());			
 		}		
-	}		
+	}	
 
 	public Cycle getCycle() {
 		return cycle;
@@ -345,11 +423,24 @@ public class CycleBean implements Serializable{
 	}
 	
 	public static void setNrStudentORGroup(int nrStudentORGroup) {
-		CycleBean.nrStudentORGroup = nrStudentORGroup;
+		CycleBean.nrStudentORGroup = nrStudentORGroup;		
+	}
+	
+	public static int getNrStudentORGroup() {
+		return nrStudentORGroup;
 	}
 	
 	public static void setTypeCycle(int typeCycle) {
 		CycleBean.typeCycle = typeCycle;
+	}
+	
+	public void clicked(Training training) {
+		this.trainingClicked = training.getExerciseTraining() + " - " +
+				training.getActionTraining();
+	}
+	
+	public String getTrainingClicked() {
+		return trainingClicked;
 	}
 	
 	public String getPeriodCycle() {

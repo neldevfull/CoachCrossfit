@@ -14,18 +14,18 @@
 	<ui:define name="_content">
 		<p:outputLabel value="Calendário" styleClass="_screen-title" style="margin-top: -15%"/>
 		<h:form id="frmCalendar" style="margin-top: 15%">
-			<p:calendar mode="inline" pattern="dd/MM/yyyy" locale="pt"
-				maxdate="#{cycleBean.week.dateEndWeek}" mindate="#{cycleBean.week.dateIniWeek}">
-				<p:ajax event="dateSelect" listener="#{cycleBean.onDateSelect}"/>
-			</p:calendar>
+			<div class="_calendar">
+				<p:calendar mode="inline" pattern="dd/MM/yyyy" locale="pt"
+					maxdate="#{cycleBean.week.dateEndWeek}" mindate="#{cycleBean.week.dateIniWeek}">
+					<p:ajax event="dateSelect" listener="#{cycleBean.onDateSelect}"/>
+				</p:calendar>
+			</div>
 		</h:form>			
 	</ui:define>
 	
-	<ui:define name="_footer">	
-		<h:form> 								
-			<p:commandButton id="btn_backWeeks" icon="ui-icon-circle-check"
-				value="Voltar a Semanas" styleClass="btn btn-lg _btn-registering _confirm"/>
-		</h:form>	
+	<ui:define name="_footer">
+		<p:button value="Voltar a semanas" outcome="/manager/cycles/Weeks"
+			icon="ui-icon-circle-check" styleClass="btn btn-lg _btn-registering _confirm"/>	
 	</ui:define>
 		
 </ui:composition>   

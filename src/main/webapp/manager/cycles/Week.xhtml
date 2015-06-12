@@ -1,0 +1,41 @@
+<ui:composition template="/WEB-INF/Templates/MainLayout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    
+    <ui:define name="titulo">Semana</ui:define>
+	
+	<ui:define name="_header">
+		<h1 class="header">Matheus Frugeri - Coach Crossfit</h1> 
+	</ui:define>
+	
+	<ui:define name="_content">		 						 								 
+		<div class="_container-datatable">
+			<h:form>
+				<p:outputLabel value="#{cycleBean.week.nameWeek}" styleClass="_screen-title _large-title"/>					
+				<h:dataTable value="#{cycleBean.week.days}" var="day">								
+					<p:column>															
+						<p:outputLabel value="#{day.nameDay}" styleClass="_sub-title"/>
+						<h:dataTable value="#{day.trainings}" var="training" id="tableTrainings"
+							rowClasses="tableFirstLine,tableNextLine" styleClass="_list-container">						
+							<p:column>												
+								<p:commandLink styleClass="_list-content-table" oncomplete="PF('viewTraining').show(); return false;" 
+									action="#{cycleBean.clicked(training)}" update="@form"
+									value="#{fn:substring(training.exerciseTraining.concat(' - ').concat(training.actionTraining), 0, 40)}"/>		 																					  
+							</p:column>						 							
+						</h:dataTable>													 																					 
+					</p:column> 
+				</h:dataTable>
+				<p:dialog id="trainingClicked" widgetVar="viewTraining" header="Exercício" modal="true" resizable="false">
+					<p:outputLabel value="#{cycleBean.trainingClicked}"/>
+				</p:dialog>
+			</h:form>	
+		</div>													
+	</ui:define>
+	
+	<ui:define name="_footer"></ui:define>
+		
+</ui:composition>  

@@ -7,7 +7,7 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.coachcrossfit.beans.coach.CoachBean;
@@ -17,7 +17,7 @@ import br.com.coachcrossfit.models.Exercise;
 import br.com.coachcrossfit.validations.Validations;
 
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ExerciseBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;

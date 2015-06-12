@@ -20,10 +20,12 @@
 				validator="#{cycleBean.validations.validateName}"/>
 			<p:calendar id="dateIniCycle" value="#{cycleBean.cycle.dateIniCycle}" 
 				placeholder="Data de Início" requiredMessage="Data de início é obrigatória"
-				required="true" validator="#{cycleBean.validations.validateDate}" pattern="dd/MM/yyyy"/>
+				required="true" validator="#{cycleBean.validations.validateDate}" pattern="dd/MM/yyyy"
+				rendered="#{cycleBean.cycle.idCycle == 0}"/>
 		    <p:inputText id="periodCycle" value="#{cycleBean.periodCycle}"
 		    	placeholder="Período em semanas" styleClass="form-control input-lg input-sm _input-style _record-student"
-		    	required="true" requiredMessage="Período é obrigatório"/>				
+		    	required="true" requiredMessage="Período é obrigatório"
+		    	rendered="#{cycleBean.cycle.idCycle == 0}"/>				
 			<p:inputText id="paymentCycle" value="#{cycleBean.paymentCycle}"   
 				placeholder="Valor do Ciclo" styleClass="form-control input-lg input-sm _input-style _record-student"
 				requiredMessage="Valor é obrigatório" required="true"/>
@@ -35,7 +37,11 @@
 	
 	<ui:define name="_footer">	
 		<p:commandButton action="#{cycleBean.cycleCad('/manager/cycles/Weeks?faces-redirect=true')}" icon="ui-icon-circle-check"
-			value="Salvar!" styleClass="btn btn-lg _btn-registering _confirm" update=":cycleCad"/>
+			value="Salvar!" styleClass="btn btn-lg _btn-registering _confirm" update=":cycleCad"
+			rendered="#{cycleBean.cycle.idCycle == 0}"/>  
+		<p:commandButton action="#{cycleBean.cycleUp()}" icon="ui-icon-circle-check"
+			value="Alterar!" styleClass="btn btn-lg _btn-registering _btn-update" update=":cycleCad"
+			rendered="#{cycleBean.cycle.idCycle != 0}"/>
 	</ui:define>
 		
 </ui:composition>  

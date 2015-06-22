@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.coachcrossfit.beans.coach.CoachBean;
@@ -29,7 +29,7 @@ import br.com.coachcrossfit.reflections.Reflections;
 import br.com.coachcrossfit.validations.Validations;
 
 @ManagedBean
-@ApplicationScoped 
+@SessionScoped 
 public class GroupBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

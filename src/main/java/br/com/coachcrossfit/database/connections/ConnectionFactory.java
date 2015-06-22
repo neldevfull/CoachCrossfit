@@ -8,7 +8,7 @@ public class ConnectionFactory {
 //	public Connection getConnection(){
 //		try{
 //			Class.forName("com.mysql.jdbc.Driver");
-//			String url = "jdbc:mysql://coachcrossfit.cbvshgri1s60.sa-east-1.rds.amazonaws.com:3306/coachcrossfit?user=managercoach&password=aL69esaBataD30#";
+//			String url = "jdbc:mysql://aa13u4zzezlj84e.cbvshgri1s60.sa-east-1.rds.amazonaws.com:3306/ebdb?user=coachcrossfit&password=aL69esaBataD30#";
 //			return DriverManager.getConnection(url);	 		
 //		}
 //		catch(Exception e){
@@ -29,4 +29,4 @@ public class ConnectionFactory {
 		}		
 	}
  			
-}
+} 

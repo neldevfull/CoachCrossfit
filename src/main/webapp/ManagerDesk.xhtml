@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<h:outputStylesheet name="bootstrap.min.css" library="css" />	
+	<h:outputStylesheet name="style_II.css" library="css" />
+	<h:outputScript name="calendarLocale.js" library="js" />
+	<title><ui:insert name="titulo">CoachCrossfit System</ui:insert></title>
+</h:head>
+<h:body styleClass="_img-background">
+	<header>
+		<ui:insert name="_toolbar">
+			<ul class="_toolbar">
+				<li>Configurações</li>
+				<li>Ajuda</li>
+				<li>Sair</li>
+			</ul>
+		</ui:insert>
+	</header>
+	<div class="container-fluid container-full" style="position:relative;">
+		<div class="row">
+			<div class="col-lg-12 text-center v-center">								
+				<nav>					
+					<ui:insert name="_leftBar">
+						<div class="_left-bar">  
+							<h:graphicImage library="images" name="Logo_II.png" styleClass="_logo-desk"/>
+							<p:outputLabel value="Coach: #{coachBean.coach.nameUser}" styleClass="_name-user"/>
+							<div class="_menu">
+								<h:form>
+									<ul>
+										<li><p:button outcome="/manager/exercises/Exercises" icon="fa fa-child"
+											type="button" value="Exercícios" styleClass="_input-style btn btn-lg btn-primary _btn-menu"/></li>
+										<li><p:commandButton action="#{pagesBean.loadPage('/manager/students/StudentDesk.xhtml')}" 
+											icon="fa fa-user" value="Alunos" styleClass="_input-style btn btn-lg btn-primary _btn-menu"
+											update=":content"/></li>
+										<li><p:commandButton action="#{studentBean.loadStudent('/manager/StudentDesk?faces-redirect=true')}"
+											icon="fa fa-group" value="Grupos" styleClass="_input-style btn btn-lg btn-primary _btn-menu"/></li>
+										<li><p:commandButton icon="fa fa-file-o" type="button" value="Relatórios"
+											styleClass="_input-style btn btn-lg btn-primary _btn-menu"/></li>
+										<li><p:commandButton icon="fa fa-line-chart" type="button" value="Gráficos"
+											styleClass="_input-style btn btn-lg btn-primary _btn-menu"/></li>	
+									</ul> 	
+								</h:form>																		
+							</div>
+						</div>
+					</ui:insert>					
+				</nav>
+					<p:panel id="content">
+						<div class="_content">
+							<ui:include src="#{pagesBean.page}"></ui:include>
+						</div>
+					</p:panel> 										
+			</div>
+		</div>				
+	</div>	
+	<footer>
+		<ui:insert name="_footer"></ui:insert>
+	</footer>	
+</h:body> 
+</html>  

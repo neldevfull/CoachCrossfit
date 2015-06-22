@@ -1,5 +1,6 @@
 *{ 
-	margin:0 auto; 		
+	margin: 0 auto; 	
+	font-family: DroidSans;	
 }
  /* Fontes */
  @font-face{
@@ -9,12 +10,7 @@
 @font-face{
 	font-family: "DroidSans-Bold";
 	src: url('#{resource['fonts/DroidSans-Bold.ttf']}');
-}
- /* Valores padrão */
- body{
-    font-family: DroidSans;
-}
- 
+} 
 /* Estilo para as telas principais */
 ._img-logo {
 	width: 80%;
@@ -221,8 +217,160 @@ table {
 	background-image:url(#{request.contextPath}/resources/images/Background.jpg);
 }
 
-/* Medium devices (desktops, 992px and up) */
-@media (max-width:1366px) {
+/* Desktop devices */
+@media (max-width: 1800px) and (min-width: 980px) { 	
+	/* MENU LEFTBAR [Start] */	 	 
+	._left-bar {
+		width: 25%;  
+		height: 60em;     
+		float: left;	
+		margin: -1.5% -1%;
+		padding: 1%; 
+		background-color: rgba(255, 255, 255, 0.7);
+		border-right: 2px solid #286090;  
+		box-shadow: 5px 10px 10px #dddddd !important; 		 		
+	}
+	
+	._logo-desk {
+		width: 100%; 
+		float: left;
+	}
+	
+	._menu {
+		width: 100%;				
+	}
+	._menu ul {		
+		list-style: none;
+		margin-left: -10%;
+	}
+	._menu ul li {]
+		width: 100% !important;
+		padding: 0.5% 0;
+	}
+	._btn-menu {
+		background-color: transparent !important;
+		border: none;
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		color: #286090;
+	}
+	
+	._btn-menu :HOVER, _btn-menu :ACTIVE{
+		background-color: #286090;
+		color: white;  
+	}
+	
+	._name-user {
+		width: 100%; 
+		margin: 5% 0; 
+		padding: 2% 0;  		
+		text-align: center;
+		background-color: #F9F9F9;	 
+	}
+		
+	/* MENU LEFTBAR [End] */
+	
+	/* HEADER [Start] */
+	header {
+		width: 100%;
+		height: 20px;  
+		background-color: black;
+		color: white; 
+		padding: 2% 0;    
+		margin-bottom: 1.5%;
+		box-shadow: 0 5px 8px 5px #dddddd !important;
+	}
+	
+	._toolbar {	 		
+		width: 100%;					
+		list-style: none;
+		text-align: right;
+		  		 		  	
+	}
+	._toolbar li {
+		display: inline;
+		padding: 0 5%;	 	
+		cursor: pointer; 
+		font-weight: bold; 	     		
+	}
+	/* HEADER [End] */
+	
+	/* CONTENT [Start] */	 
+	._content {
+		width: 79%; 
+		float:right;
+		margin: -2.2% -2% 0 0;		
+		padding: 2.5%; 
+		background-color: rgba(255, 255, 255, 0.4); 			      	 							  		  	    
+	}
+	._border { 
+		width: 100%;
+		float:left;
+		border-bottom: 1px solid #eaeaea; 
+	}
+	 
+	/* ALTER COMPONENT PANEL PRIMEFACES */
+	.ui-widget-content {
+		border: none !important;
+		background-color: transparent !important;
+	}
+	/* CONTENT [End] */
+	
+	/* FORM CADASTRE */
+	._title-form {
+		width: 100%;
+		float: left;
+		text-align: left;
+		font-size: 1.6em;
+		font-weight: bold;		
+		color: #286090;
+		border-bottom: 1px dashed #e0e0e0;
+	}
+	._title-form span {		 	
+		color: #bcbcbc;   
+		font-style: italic;
+	}
+	._subtitle-form {
+		color: #b70000;
+		margin-top: 2%;
+	}
+	._input-form {  
+		width: 60% !important;
+		height: 2.1em !important; 
+		float: left;		   
+		border: 1px solid #286090 !important; 	
+		box-shadow: 10px 10px 5px #dddddd !important; 
+	}
+	._btn-confirm {
+		width: 30% !important;		 	
+		height: 2.3em !important;
+		float: left;
+		clear: both; 
+		margin: 2% 0; 
+		background-image: linear-gradient(to bottom, green, #008000) !important;
+		color: #F2F2F2 !important; 
+		border-color: none !important; 
+		border-radius: 5%;
+		font-size: 1.1em !important; 
+		font-weight: lighter !important;     
+		opacity: 100 !important; 
+		box-shadow: 10px 10px 5px #dddddd !important;			  
+	} 	
+	
+	._messages {
+		width: 25% !important;  
+		margin-left: 5% !important;   
+		float:left !important; 
+	}
+	
+	/* CONTENT REGISTER */
+	._content-register { 
+		margin-top: 2%; 
+	}
+}
+  
+/* Mobile devices */
+@media (max-width:979px) {
 	._input-style{
 		width: 100%;
 		height: 30%;
@@ -327,7 +475,7 @@ table {
 }
 
 /* Caso o dispositivo esteja em modo paisagem */
-@media (max-width:1366px) and (orientation: landscape) { 
+@media (max-width: 1366px) and (orientation: landscape) { 
 	footer{
 		width: 100% !important;	
 		position: relative;						
@@ -335,11 +483,23 @@ table {
 }
 	
 /* Large devices (large desktops, 1200px and up) */
-@media (min-width:1367px) { 
+@media (min-width: 1280px) { 
+	._container-login {
+		margin-top: 5%;
+	}
 	._input-login{
 		background-color:black;  
 	}
 	.logo{
-		max-width: 50%;		
+		max-width: 35%;				
+	}	
+	._input-style {
+		width: 100%;
 	}	
 }
+@media (min-width: 1500px){	
+	._input-style {
+		margin: 2% 0 0 0;		
+	}
+}
+

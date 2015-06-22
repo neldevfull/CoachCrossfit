@@ -39,7 +39,7 @@ public class LoginBean implements Serializable{
 		    	session.setAttribute("userLogged", this.user); 		    	
 		    	// Verifica tipo de usuário e redireciona
 		    	if(this.user.getTypeUser() == 1)		    		
-		    		return "Manager?faces-redirect=true";		    				    			    	
+		    		return "ManagerRedirect?faces-redirect=true";		    				    			    	
 		    	else		    		
 		    		return "Home?faces-redirect=true";		    	
 		    }

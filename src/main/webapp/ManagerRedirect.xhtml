@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputScript name="jquery-1.11.3.min.js" library="js"></h:outputScript>
+	<title><ui:insert name="titulo">CoachCrossfit System</ui:insert></title>
+</h:head>
+<h:body>
+	<script>
+		if($(window).width() >= 1200)
+			window.location.href = "ManagerDesk.xhtml"
+		else
+			window.location.href = "Manager.xhtml"						
+	</script>
+</h:body> 
+</html>  

@@ -30,13 +30,14 @@ import br.com.coachcrossfit.utilities.Util;
 public class MainTest {
 	public static void main(String[] args){
 		
+		/*
 		Util util = new Util();		
 		Date date = new Date();
 		System.out.println(date);
 		date = util.calculateWeek(date, Long.parseLong("4"));
 		System.out.println(date);
 		
-		/*
+		
 		Instant instant = Instant.ofEpochMilli(new Date().getTime());
 		LocalDate localDate = LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
 		

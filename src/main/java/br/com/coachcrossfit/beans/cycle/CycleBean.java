@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -32,7 +32,7 @@ import br.com.coachcrossfit.utilities.Util;
 import br.com.coachcrossfit.validations.Validations;
 
 @ManagedBean 
-@ApplicationScoped
+@SessionScoped
 public class CycleBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;

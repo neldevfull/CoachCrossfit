@@ -40,7 +40,7 @@
 			value="Salvar!" styleClass="btn btn-lg _btn-registering _confirm" update=":cycleCad"
 			rendered="#{cycleBean.cycle.idCycle == 0}"/>  
 		<p:commandButton action="#{cycleBean.cycleUp()}" icon="ui-icon-circle-check"
-			value="Alterar!" styleClass="btn btn-lg _btn-registering _btn-update" update=":cycleCad"
+			value="Alterar!" styleClass="btn btn-lg _btn-registering _btn_include" update=":cycleCad"
 			rendered="#{cycleBean.cycle.idCycle != 0}"/>
 	</ui:define>
 		

@@ -13,8 +13,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.coachcrossfit.beans.coach.CoachBean;
@@ -27,7 +27,7 @@ import br.com.coachcrossfit.reflections.Reflections;
 import br.com.coachcrossfit.validations.Validations;
   
 @ManagedBean
-@ApplicationScoped
+@SessionScoped
 public class StudentBean extends UserBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -153,6 +153,7 @@ public class StudentBean extends UserBean implements Serializable{
 			
 			// Inicializa aluno
 			this.student = new Student();
+			new StudentsBean();
 		}
 		catch(Exception e){
 			FacesContext.getCurrentInstance().addMessage("messages",  new FacesMessage(e.getMessage().toString()));			
@@ -196,7 +197,7 @@ public class StudentBean extends UserBean implements Serializable{
 		this.student = new Student();
 		return url;
 	}
-	
+		
 	/**
 	 * Load Student for Cycle
 	 */

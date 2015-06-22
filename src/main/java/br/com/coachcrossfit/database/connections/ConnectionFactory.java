@@ -3,19 +3,7 @@ package br.com.coachcrossfit.database.connections;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class ConnectionFactory {
-			
-//	public Connection getConnection(){
-//		try{
-//			Class.forName("com.mysql.jdbc.Driver");
-//			String url = "jdbc:mysql://coachcrossfit.cbvshgri1s60.sa-east-1.rds.amazonaws.com:3306/coachcrossfit?user=managercoach&password=aL69esaBataD30#";
-//			return DriverManager.getConnection(url);	 		
-//		}
-//		catch(Exception e){
-//			throw new RuntimeException("Falha na conexão com o banco de dados \n "
-//					+ "O Sistema apresenta a seguinte informação: "+e.getMessage());
-//		}		
-//	}
+public class ConnectionFactory {		
 	
 	public Connection getConnection(){
 		try{

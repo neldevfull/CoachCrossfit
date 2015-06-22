@@ -5,7 +5,7 @@ import java.sql.Connection;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +16,7 @@ import br.com.coachcrossfit.models.User;
 import br.com.coachcrossfit.validations.Validations;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class LoginBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
